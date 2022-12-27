@@ -189,10 +189,11 @@ function GameResult({ songConfig }: { songConfig: any }) {
             </button> 
           </div> */}
           <script type="text/javascript" src="https://udbaa.com/bnr.php?section=heardle&pub=162489&format=468x60&ga=g"></script>
-       
-          <a href="https://yllix.com/publishers/162489" target="_blank">
-            <img src="//ylx-aff.advertica-cdn.com/pub/468x60.png" style={{border:"none",margin:"0",padding:"0", verticalAlign:"baseline"}} alt="ylliX - Online Advertising Network" />
-          </a>
+          <noscript>
+            <a href="https://yllix.com/publishers/162489" target="_blank">
+              <img src="//ylx-aff.advertica-cdn.com/pub/468x60.png" style={{border:"none",margin:"0",padding:"0", verticalAlign:"baseline"}} alt="ylliX - Online Advertising Network" />
+            </a>
+          </noscript>
           
         </div>
       </div>

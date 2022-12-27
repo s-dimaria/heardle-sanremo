@@ -42,74 +42,37 @@ let DEFAULT_TODAY_GUEST_LIST = [{
 
 const MAX_GUESS_INDEX = 5;
 
+const initState = {
+    date: getDayStr(),
+    guessList: DEFAULT_TODAY_GUEST_LIST, 
+    lastStep: 0,
+    openedStep: 0,
+    fails: 0,
+    finished: false
+}
+
 
 function saveState(state) {
 
     localStorage.setItem("Game", JSON.stringify(state));
-    
+  
 }
 
 function loadState() {
 
-    let day = getDayStr();
-
     let state = localStorage.getItem("Game");
-    if (state) {
-        
-        // decrypt, validate
-        // Check date for update state
-        if(JSON.parse(state).date.localeCompare(day) === 0) {
-            console.info("Game item found")
-            // return JSON.parse(state);
-        }
-        // reset state (not the count)
-        else {
-            console.info("Game item reset")
-            state = resetState(JSON.parse(state),day);
-        }
+
+    if(state) {
         return JSON.parse(state);
+    }
     
-    }
-
-    return {
-        guessList: DEFAULT_TODAY_GUEST_LIST, 
-        lastStep: 0,
-        openedStep: 0,
-        fails: 0,
-        finished: false,
-        date: day
-    }
-}
-
-function resetState(state, day) {
-
-    let latestState = state;
-
-    console.info("Reset State")
-    let guessList = state.guessList;
-
-    for(let i = 0; i <= MAX_GUESS_INDEX; i++) {
-        guessList[i].isCorrect=false;
-        guessList[i].isSkipped=false;
-        guessList[i].answer = ""
-    }
-   
-    latestState = {
-        ...state,
-        guessList: guessList,
-        lastStep: 0,
-        openedStep: 0,
-        finished: false,
-        date: day
-    }
-
-    saveState(latestState)
-    return latestState;
+    return initState;
 }
 
 
 function modalReducer(state, action) {
     let latestState = state;
+    let day = getDayStr();
 
     switch (action.type) {
         case 'SKIP': {
@@ -130,6 +93,7 @@ function modalReducer(state, action) {
 
             latestState = {
                 ...state,
+                date: day,
                 guessList: guessList,
                 lastStep: lastStep,
                 openedStep: openedStep + 1,
@@ -158,6 +122,7 @@ function modalReducer(state, action) {
 
             latestState = {
                 ...state,
+                date: day,
                 guessList: guessList,
                 lastStep: lastStep,
                 finished: finished,
@@ -181,6 +146,7 @@ function modalReducer(state, action) {
 
             latestState = {
                 ...state,
+                date: day,
                 guessList: guessList,
                 lastStep: lastStep + 1,
                 openedStep: openedStep + 1,
@@ -208,6 +174,11 @@ function modalReducer(state, action) {
         case 'RESET': {
             let guessList = state.guessList;
             //load from localstorage
+            for(let i = 0; i <= MAX_GUESS_INDEX; i++) {
+                guessList[i].isCorrect=false;
+                guessList[i].isSkipped=false;
+                guessList[i].answer = ""
+            }
             latestState = {
                 ...state,
                 guessList: guessList,
@@ -243,9 +214,15 @@ function modalReducer(state, action) {
 }
 
 function GameContextProvider({ children }) {
+
+    let day = getDayStr();
     //load from localstorage
     const [state, dispatch] = React.useReducer(modalReducer, loadState())
-    const value = { state, dispatch }
+    const value = {state, dispatch}
+    React.useEffect(() => {
+        if(day.localeCompare(state.date) != 0)
+            dispatch({type: 'RESET'})
+    },[])
     return <GameContext.Provider value={value}>{children}</GameContext.Provider>
 }
 
