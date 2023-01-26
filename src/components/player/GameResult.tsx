@@ -180,8 +180,9 @@ function GameResult({ songConfig }: { songConfig: any }) {
               </div>
           </div>
           <NextTimer />
-          {/* <Banner/> */}
-  
+          <Banner/>
+          
+
         </div>
       </div>
     </div>
