@@ -90,12 +90,6 @@ export const getList = (token: string, inputValue: string, callback: (res: any[]
                   
                     let label = track.artists[0].name + " - " + track.name;
                     label = label.replaceAll("å", "a");
-                    label = label.replaceAll("è", "e");
-                    label = label.replaceAll("é", "e");
-                    label = label.replaceAll("ì", "i");
-                    label = label.replaceAll("í", "i");
-                    label = label.replaceAll("ú", "u");
-                    label = label.replaceAll("ù", "u");
                     label = label.replaceAll("_", "");
                     label = label.replaceAll(".", "");
                     label = label.replaceAll("?", "");

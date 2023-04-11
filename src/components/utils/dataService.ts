@@ -54,7 +54,7 @@ async function fetchSong(accessToken:string, artist: string): Promise<any> {
 
 
 export const getDailySong = (accessToken: string): Promise<any> => {
-
+    const banWords = ["rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session"];	// words to filter out
     let day = getDayStr()
 
     let artist = artists[Math.floor(Math.random() * artists.length)];
@@ -71,12 +71,13 @@ export const getDailySong = (accessToken: string): Promise<any> => {
         const database = getDatabase();
 
         let selectedSong: any;
-
+        var value: any;
         do {
          selectedSong = await fetchSong(accessToken, artist);
-        
-        }while(selectedSong.preview_url != null && selectedSong.artists[0].name.toLowerCase() != artist)
-        
+         value = new RegExp(banWords.join('|')).test(selectedSong.name.toLowerCase());
+        }while(selectedSong.preview_url != null && selectedSong.artists[0].name.toLowerCase() != artist && !value)
+      
+
         /*console.log(selectedSong)
         console.log(selectedSong.artists[0].name.toLowerCase() + " " + artist)
         console.log(selectedSong.artists[0].name.toLowerCase() === artist)
@@ -85,11 +86,19 @@ export const getDailySong = (accessToken: string): Promise<any> => {
         let song = selectedSong.name.includes("-") ? selectedSong.name.substring(0, selectedSong.name.indexOf("-")) :
         selectedSong.name.includes("(") ? selectedSong.name.substring(0, selectedSong.name.indexOf("(")) : selectedSong.name;
 
+        let trackname = selectedSong.artists[0].name + " " + selectedSong.name;
+
+        trackname = trackname.replaceAll("å", "a");
+        trackname = trackname.replaceAll("_", "");
+        trackname = trackname.replaceAll(".", "");
+        trackname = trackname.replaceAll("?", "");
+        trackname = trackname.replaceAll("!", "");
+
         hardCodedSong = {
             day: day,
             songLength: 30,
             breaks: [1, 2, 4, 8, 16, 30],
-            trackName: selectedSong.artists[0].name + " " + selectedSong.name,
+            trackName: trackname,
             others: [selectedSong.artists[0].name + " " + song],
             song: selectedSong.name.indexOf("-") !== -1 ? selectedSong.name.substring(0, selectedSong.name.indexOf("-")) : selectedSong.name,
             artist: selectedSong.artists[0].name,
