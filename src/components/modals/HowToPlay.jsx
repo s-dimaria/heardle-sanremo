@@ -21,7 +21,7 @@ function HowToPlay() {
                         <div className="flex-1 pl-7">
                             <h2 className="text-sm text-center uppercase text-custom-line font-semibold tracking-widest">Come giocare</h2>
                         </div>
-                        <div className="justify-self-end flex">
+                        {/* <div className="justify-self-end flex">
                             <button autoFocus="" className="border-none text-custom-mg" type="button" aria-label="Kapat" title="Kapat"
                                 onClick={() => onStart()}>
                                 <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -30,7 +30,7 @@ function HowToPlay() {
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         <div className="flex items-center mb-6">
@@ -86,7 +86,11 @@ function HowToPlay() {
                                 <p>Indovina correttamente nel minor numero di tentativi possibili e condividi il tuo punteggio.</p>
                             </div>
                         </div>
+                        <div className="content-right">
+                        </div>
                         <div className="justify-center flex py-2 mt-2">
+                            <label>Enter your name: </label>
+                                <input type="text" value={name} />
                             <button className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm bg-custom-positive"
                                 type="button" aria-label="başla" title="Inzia"
                                 onClick={() => onStart()}>
