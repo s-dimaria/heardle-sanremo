@@ -186,3 +186,10 @@ body {
   height: 100%;
 }
 
+.username{
+  color: black;
+}
+
+.username:focus{
+  outline: none;
+}
