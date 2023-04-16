@@ -9,14 +9,12 @@ import Banner from "../Banner";
 const buildScore = (guessList: any[]): number => {
   let max = 100;
 
-  const isCorrect = guessList.some((guess) => guess.isCorrect);
-  if (isCorrect === false) {
-    return 0;
-  }
-
   // punti persi: 12, 10, 8, 6, 4
   for (let i = 0; i < guessList.length; i++) {
     if (guessList[i].isSkipped) {
+      max = max - ((guessList.length - i) * 2);
+    }
+    if (guessList[i].isCorrect === false) {
       max = max - ((guessList.length - i) * 2);
     }
   }

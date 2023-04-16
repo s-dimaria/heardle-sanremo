@@ -14,16 +14,16 @@ const getDivScore = (scores, n) => {
             let failsFract = fails/mTot;
             
             switch (true) {
-                case (failsFract > 0.9): return <div className="h-32 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.8): return <div className="h-28 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.7): return <div className="h-26 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.6): return <div className="h-24 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.5): return <div className="h-22 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.4): return <div className="h-20 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.3): return <div className="h-14 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={fails}></div>;
-                case (failsFract > 0.1): return <div className="h-4 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract > 0): return <div className="h-1 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.9): return <div className="h-32 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.8): return <div className="h-28 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.7): return <div className="h-26 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.6): return <div className="h-24 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.5): return <div className="h-22 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.4): return <div className="h-20 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.3): return <div className="h-14 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={fails}></div>;
+                case (failsFract >= 0.1): return <div className="h-4 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract >= 0): return <div className="h-1 relative w-9 bg-red-600" title={fails}></div>;
                 default: return <></>
             }
             return <></>
@@ -34,16 +34,16 @@ const getDivScore = (scores, n) => {
         let score = scores.guessList[n].count;
         let scoreFract = score/mTot;
         switch (true) {
-            case (scoreFract > 0.9): return <div className="h-32 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.8): return <div className="h-28 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.7): return <div className="h-26 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.6): return <div className="h-24 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.5): return <div className="h-22 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.4): return <div className="h-20 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.3): return <div className="h-14 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0.1): return <div className="h-4 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract > 0): return <div className="h-1 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.9): return <div className="h-32 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.8): return <div className="h-28 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.7): return <div className="h-26 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.6): return <div className="h-24 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.5): return <div className="h-22 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.4): return <div className="h-20 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.3): return <div className="h-14 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0.1): return <div className="h-4 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract >= 0): return <div className="h-1 relative w-9 bg-lime-600" title={score}></div>;
             default: return <></>
         }
 
