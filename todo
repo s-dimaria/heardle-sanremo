@@ -1,0 +1,9 @@
+TODO:
+- [x] Inserire Username e salvarlo in locale ( Sanificare Input )
+- [X] Creare UID per utente
+- [X] Caricare nel DB a fine partita UID + Username + sum+score
+- [ ] Costruire Tabella top 3 alla fine + Your position
+
+- [ ] change dominio
+
+- [ ] Testare i punteggi
