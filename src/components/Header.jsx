@@ -1,9 +1,19 @@
 import { useModalData } from "./modals/ModalContext";
+import { useState, useEffect } from "react";
 
 function Header() {
 
     const { dispatch } = useModalData();
+    const [uid, setUid] = useState("");
 
+    useEffect(() => {
+        
+        setUid(localStorage.getItem("uid"));
+        
+        return () => {
+            console.log('Component will be unmount');
+        }
+      });
 
     const openAbout = () => {
         dispatch({ type: 'About' })
@@ -19,6 +29,10 @@ function Header() {
 
     const openHowToPlay = () => {
         dispatch({ type: 'HowToPlay' })
+    }
+
+    const openGlobalStats = () => {
+        dispatch({ type: 'GlobalStats' })
     }
 
     return (
@@ -60,6 +74,16 @@ function Header() {
                                     <path d="M12 20v-6M6 20V10M18 20V4"></path>
                                 </svg>
                             </button>
+                            {uid? 
+                            <button
+                                className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
+                                onClick={openGlobalStats} type="button" aria-label="Come giocare" title="Come giocare">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 172 172" fill="white">
+                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                    <path d="M21.5,21.5v129h64.5v-32.25v-64.5v-32.25zM86,53.75c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25c-17.7805,0 -32.25,14.4695 -32.25,32.25zM118.25,86c-17.7805,0 -32.25,14.4695 -32.25,32.25c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25z">
+                                    </path>
+                                </svg>
+                            </button>:
                             <button
                                 className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
                                 onClick={openHowToPlay} type="button" aria-label="Come giocare" title="Come giocare">
@@ -70,7 +94,7 @@ function Header() {
                                     <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                                     <line x1="12" y1="17" x2="12.01" y2="17"></line>
                                 </svg>
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 </div>

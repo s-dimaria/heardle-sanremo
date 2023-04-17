@@ -8,6 +8,9 @@ function modalReducer(state, action) {
         case 'HowToPlay': {
             return { currentModal: "HowToPlay" }
         }
+        case 'GlobalStats': {
+            return { currentModal: "GlobalStats" }
+        }
         case 'Stats': {
             return { currentModal: "Stats" }
         }
