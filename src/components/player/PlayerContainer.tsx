@@ -10,7 +10,7 @@ import { useGameData } from "./GameContext";
 import MusicPlayer from "../music/MusicPlayer";
 import { checkAnswer } from "../game/Utils";
 import { OnChangeValue } from "react-select";
-import { SongConfig } from "../game/Models";
+import { SongConfig } from "../game/SongConfig";
 import { getList } from "../utils/spotifyService";
 
 

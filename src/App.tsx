@@ -6,7 +6,7 @@ import { GameContextProvider } from "./components/player/GameContext";
 import { useEffect, useState } from "react";
 import { getDailySong } from "./components/utils/dataService";
 import { getAccessToken } from "./components/utils/spotifyService";
-import { SongConfig } from "./components/game/Models";
+import { SongConfig } from "./components/game/SongConfig";
 import { getDayStr } from "./components/utils";
 
 const APP_VERSION = process.env.REACT_APP_VERSION || "0"

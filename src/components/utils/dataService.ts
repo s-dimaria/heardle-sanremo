@@ -1,10 +1,9 @@
 import { getDayStr, getDayStrAsPath } from ".";
-import { SongConfig } from "../game/Models";
+import { SongConfig } from "../game/SongConfig";
 import { artists } from "../utils/constants";
 import { getDatabase, ref, onValue, set } from "firebase/database";
-import "./firebase";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-
+import "./firebase";
 
 interface Map {
     [key: string]: any
