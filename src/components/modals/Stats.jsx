@@ -23,7 +23,7 @@ const getDivScore = (scores, n) => {
                 case (failsFract >= 0.3): return <div className="h-14 relative w-9 bg-red-600" title={fails}></div>;
                 case (failsFract >= 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={fails}></div>;
                 case (failsFract >= 0.1): return <div className="h-4 relative w-9 bg-red-600" title={fails}></div>;
-                case (failsFract >= 0): return <div className="h-1 relative w-9 bg-red-600" title={fails}></div>;
+                case (failsFract > 0): return <div className="h-1 relative w-9 bg-red-600" title={fails}></div>;
                 default: return <></>
             }
             return <></>
@@ -43,7 +43,7 @@ const getDivScore = (scores, n) => {
             case (scoreFract >= 0.3): return <div className="h-14 relative w-9 bg-lime-600" title={score}></div>;
             case (scoreFract >= 0.2): return <div className="h-10 relative w-9 bg-lime-600" title={score}></div>;
             case (scoreFract >= 0.1): return <div className="h-4 relative w-9 bg-lime-600" title={score}></div>;
-            case (scoreFract >= 0): return <div className="h-1 relative w-9 bg-lime-600" title={score}></div>;
+            case (scoreFract > 0): return <div className="h-1 relative w-9 bg-lime-600" title={score}></div>;
             default: return <></>
         }
 
