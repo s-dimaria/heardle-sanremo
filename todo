@@ -3,7 +3,15 @@ TODO:
 - [X] Creare UID per utente
 - [X] Caricare nel DB a fine partita UID + Username + sum+score
 - [ ] Costruire Tabella top 3 alla fine + Your position
+    - [X] UI
+    - [ ] Logica
+- [ ] resettare automaticamente il lunedi
 
 - [ ] change dominio
 
-- [ ] Testare i punteggi
+- [ ] Testare i punteggi (hanno senso?)
+- [ ] ( FINE ) Modificare il nome del file locale in modo che tutti si ritrovano a reinserire il nome.
+
+EXTRA:
+- [ ] Perchè è uscito remasterd??
+- [ ] al posto della classifica globale mettiamo il link a tutte le altre versioni? (INDIE, RAP, 90s..)
