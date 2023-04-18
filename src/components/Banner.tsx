@@ -6,7 +6,7 @@ export default function Banner(): JSX.Element {
     const banner = useRef<HTMLDivElement>(null)
 
     const atOptions = {
-		key : '55a8d1b09b6ef43598774f4aa5e64ef7',
+		key : 'd979a4cd0221f6b42f11993edb258468',
 		format : 'iframe',
 		height : 50,
 		width : 320,
