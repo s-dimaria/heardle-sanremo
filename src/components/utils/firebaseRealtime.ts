@@ -4,7 +4,7 @@ import './firebase';
 
 const db = getDatabase();
 
-async function setUser (user: string, score: any) {
+async function setUser(user: string, score: any) {
 
     var u = uid(16);
     localStorage.setItem("uid", u);
@@ -19,8 +19,14 @@ async function getUsers() {
 
 }
 
+async function getUserByUid(uid: any) {
+
+    return await get(ref(db,"users/" + uid));
+
+}
+
 async function updateUserByUid(uid: any, score: any) {
     await update(ref(db, "users/" + uid), score);
 }
 
-export {setUser, getUsers, updateUserByUid};
+export {setUser, getUsers, getUserByUid, updateUserByUid};

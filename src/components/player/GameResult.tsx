@@ -4,9 +4,8 @@ import NextTimer from "./NextTimer";
 import { useState, useEffect } from "react";
 import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_SPOTIFY_LIST_URL, HEARDLE_IT_WEB_URL } from "../game/Constants";
 import { getDayFormattedText } from "../utils";
-import { updateUserByUid } from "../utils/firebaseRealtime";
+import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
 import Table from "./Scoreboard";
-import Banner from "../Banner";
 
 
 const buildScore = (guessList: any[]): number => {
@@ -96,6 +95,8 @@ const buildShareText = (guessList: any[]) => {
   return `${icons} \n #HeardleItalia ${todayStr} \n \n ${HEARDLE_IT_WEB_URL}`;
 }
 
+
+
 function GameResult({ songConfig }: { songConfig: any }) {
 
   const { state: { guessList } } = useGameData();
@@ -103,23 +104,23 @@ function GameResult({ songConfig }: { songConfig: any }) {
 
   const [showCopied, setShowCopied] = useState(false);
 
+  // SUPER BUG! SCORE SI AGGIORNA OGNI VOLTA CHE SI RICARICA LA PAGINA POICHE' SI RIAGGIONARNA USER
   useEffect(() => {
-    
-   
-    let uid = localStorage.getItem("uid");
-    const name = localStorage.getItem("user");
-    let points = buildScore(guessList)
-    let score = {
-      name : name,
-      score : points
+
+    async function updateScore() {
+
+      let uid = localStorage.getItem("uid");
+      const name = localStorage.getItem("user");
+      let points = buildScore(guessList)
+  
+      let score = (await getUserByUid(uid)).val();
+      score.score = score.score + points
+      if(uid != null)
+        updateUserByUid(uid, score);
     }
-    if(uid != null)
-      updateUserByUid(uid, score);
+    updateScore()
     
-    return () => {
-        console.log('Component will be unmount');
-    }
-  }, []);
+  },[])
 
   const onCopyClicked = () => {
     const text = buildShareText(guessList);

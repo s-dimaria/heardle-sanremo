@@ -11,8 +11,9 @@ function Header() {
         setUid(localStorage.getItem("uid"));
         
         return () => {
-            console.log('Component will be unmount');
+            setUid("");
         }
+        
       });
 
     const openAbout = () => {
