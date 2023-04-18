@@ -27,5 +27,5 @@ export default function Banner(): JSX.Element {
     }
 }, [])
 
-    return <div ref={banner}></div>
+    return <div ref={banner} className="flex flex-col justify-center items-center"></div>
 }
