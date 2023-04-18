@@ -17,7 +17,7 @@ export default function Banner(): JSX.Element {
         const conf = document.createElement('script')
         const script = document.createElement('script')
         script.type = 'text/javascript'
-        script.src = `://www.profitabledisplaynetwork.com/${atOptions.key}/invoke.js`
+        script.src = `//www.profitabledisplaynetwork.com/${atOptions.key}/invoke.js`
         conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`
 
         if (banner.current) {

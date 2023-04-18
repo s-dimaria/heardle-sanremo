@@ -208,6 +208,7 @@ function GameResult({ songConfig }: { songConfig: any }) {
               </div>
           </div>
           <NextTimer />
+
           <Banner/>
           
 
