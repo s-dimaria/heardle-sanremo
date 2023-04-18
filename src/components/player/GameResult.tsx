@@ -6,6 +6,7 @@ import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_SPOTIFY_LIST_
 import { getDayFormattedText } from "../utils";
 import { updateUserByUid } from "../utils/firebaseRealtime";
 import Table from "./Scoreboard";
+import Banner from "../Banner";
 
 
 const buildScore = (guessList: any[]): number => {
@@ -178,7 +179,7 @@ function GameResult({ songConfig }: { songConfig: any }) {
             <p className="text-lg text-custom-line">{GAME_RESULT_FAILED_MESSAGE}</p>
           }
         
-          <div className="flex justify-center items-center pt-3">
+          <div className="flex justify-center items-center pt-2">
             <button className="px-2 py-2 uppercase tracking-widest border-none rounded-full flex items-center font-semibold text-sm bg-custom-positive mr-2"
               onClick={onCopyClicked}>
               {showCopied ? "Copiato" : "Condividi il risultato"}
@@ -191,23 +192,23 @@ function GameResult({ songConfig }: { songConfig: any }) {
             </button>
           </div>
         </div>
-        <div>
+      <div>
           
-        <div className="flex flex-col justify-center items-center mt-3 pt-3">
-        <p className="text-custom-line text-lg">Classifica della settimana!</p>
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-custom-line text-lg mb-2">Classifica della settimana!</p>
         </div>
-        <div className="flex justify-center text-custom-line">
+        <div className="flex justify-center text-custom-line mb-5">
           <Table></Table>
         </div>
         <div className="text-center pb-3">
-              <div className="p-2 bg-indigo-800 items-center text-indigo-100 leading-none rounded-full flex inline-flex mt-2" role="alert">
-                <span className="rounded-full bg-rose-600 uppercase px-2 py-1 text-xs font-bold mr-3">New!</span>
+              <div className="bg-indigo-800 items-center text-indigo-100 leading-none rounded-full flex inline-flex mt-3" role="alert">
+                <span className="rounded-full bg-rose-600 uppercase px-2 py-1 text-xs font-bold mr-2">New!</span>
                 <span className="font-semibold mr-2 text-left flex-auto"><a href="http://indie.heardle.it/" >Prova Heardle Italia INDIE! </a></span>
                 <svg className="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
               </div>
           </div>
           <NextTimer />
-          {/* <Banner/> */}
+          <Banner/>
           
 
         </div>

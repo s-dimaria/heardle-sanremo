@@ -101,11 +101,11 @@ function HowToPlay() {
                                     <p>Indovina correttamente nel minor numero di tentativi possibili e condividi il tuo punteggio.</p>
                                 </div>
                             </div>
-                            <div className="content-right">
+                            <div className="text-center">
+                            <p>Inserisci il tuo Nome e scala la calssifica!</p>
                             </div>
-                                <label>  </label>
                             <div className="justify-center flex py-2 mt-2">
-                                    <input className="username" type="text" name="username" placeholder="Nickname" value = {username} onChange={(event) => {onChanged(event)}}/>
+                                    <input className="username text-center" type="text" name="username" placeholder="Nickname" value = {username} onChange={(event) => {onChanged(event)}}/>
                                 <button className={ !isValid ? "px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm bg-custom-positive opacity-50"
                                 : "px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm bg-custom-positive" }
                                     type="button" aria-label="inizia" title="Inzia"
@@ -116,9 +116,9 @@ function HowToPlay() {
                             </div>
                         </div>
                         <p className="text-xs mt-3 text-center text-custom-line">
-                            Per migliorare la tua esperienza utente questa applicazione usa: 
-                            <a href="https://policies.google.com/technologies/partner-sites" target="_blank"> Google</a>, <a href="https://developer.spotify.com/policy/" target="_blank"> Spotify</a> e
-                            <a href="https://soundcloud.com/pages/privacy" target="_blank"> Soundcloud</a>
+                            Il nome non è modificabile <i>per ora</i>, quindi sceglilo bene! 
+                            {/* <a href="https://policies.google.com/technologies/partner-sites" target="_blank"> Google</a>, <a href="https://developer.spotify.com/policy/" target="_blank"> Spotify</a> e
+                            <a href="https://soundcloud.com/pages/privacy" target="_blank"> Soundcloud</a> */}
                         </p>
                     </div>
                 </div>

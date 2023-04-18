@@ -35,8 +35,8 @@ function Table() {
     },[])
 
     return (
-    <div>
-      <table className="center border-collapse border border-gray-400">
+
+      <table className="center border-collapse border-gray-400 text-center">
         <thead>
           <tr>
             <th className="border border-gray-400 px-4 py-0"></th>
@@ -47,25 +47,31 @@ function Table() {
         <tbody>
           <tr>
             <td className="border border-gray-400 px-4 py-1">🥇</td>
-            <td className="border border-gray-400 px-4 py-1">Row 1, Column 2</td>
+            <td className="border border-gray-400 px-4 py-1">Rhon</td>
             <td className="border border-gray-400 px-4 py-1">123</td>
           </tr>
           <tr>
             <td className="border border-gray-400 px-4 py-1">🥈</td>
-            <td className="border border-gray-400 px-4 py-1">Row 2, Column 2</td>
+            <td className="border border-gray-400 px-4 py-1">Sexy</td>
             <td className="border border-gray-400 px-4 py-1">123</td>
           </tr>
           <tr>
             <td className="border border-gray-400 px-4 py-1">🥉</td>
-            <td className="border border-gray-400 px-4 py-1">Row 3, Column 2</td>
+            <td className="border border-gray-400 px-4 py-1">Porco il Papa</td>
             <td className="border border-gray-400 px-4 py-1">123</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+         <tr className="bg-white bg-opacity-10">
+            <td className="border border-gray-400 px-4 py-1">45</td>
+            <td className="border border-gray-400 px-4 py-1">aa</td>
+            <td className="border border-gray-400 px-4 py-1">23<a className="text-green-500">+23</a></td>
           </tr>
         </tbody>
       </table>
-
-      
-      <p className="text-center">Ti trovi in X posizione!</p>
-    </div>
 
     );
   }
