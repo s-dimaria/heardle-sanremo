@@ -27,5 +27,5 @@ export default function Banner(): JSX.Element {
     }
 }, [])
 
-    return <div ref={banner} className="items-center"></div>
+    return <div ref={banner}></div>
 }
