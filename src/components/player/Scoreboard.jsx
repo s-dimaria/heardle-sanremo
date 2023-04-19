@@ -42,7 +42,7 @@ function Table() {
 
     fetchData();
 
-  },[myUID])
+  },[myUID, user])
   
 
     return (
