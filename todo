@@ -15,3 +15,6 @@ TODO:
 EXTRA:
 - [ ] Perchè è uscito remasterd??
 - [ ] al posto della classifica globale mettiamo il link a tutte le altre versioni? (INDIE, RAP, 90s..)
+
+PROBLEMS:
+- [ ] update dello score arriva in ritardo (codice in PLayerContainer)

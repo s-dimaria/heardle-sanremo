@@ -104,24 +104,6 @@ function GameResult({ songConfig }: { songConfig: any }) {
 
   const [showCopied, setShowCopied] = useState(false);
 
-  // SUPER BUG! SCORE SI AGGIORNA OGNI VOLTA CHE SI RICARICA LA PAGINA POICHE' SI RIAGGIONARNA USER
-  useEffect(() => {
-
-    async function updateScore() {
-
-      let uid = localStorage.getItem("uid");
-      const name = localStorage.getItem("user");
-      let points = buildScore(guessList)
-  
-      let score = (await getUserByUid(uid)).val();
-      score.score = score.score + points
-      if(uid != null)
-        updateUserByUid(uid, score);
-    }
-    updateScore()
-    
-  },[])
-
   const onCopyClicked = () => {
     const text = buildShareText(guessList);
     setShowCopied(true);

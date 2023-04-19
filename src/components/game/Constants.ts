@@ -15,3 +15,5 @@ export const GAME_RESULT_FAILED_MESSAGE = "Non ti preoccupare, chiedi ai tuoi am
 export const STRING_COMPARE_LOCALE = "it";
 
 export const SILENT_SONG = "https://w.soundcloud.com/player/?url=" + "https://soundcloud.com/bdsls01/silence-of-the-innocent";
+
+export const icon = ["🥇","🥈","🥉"]

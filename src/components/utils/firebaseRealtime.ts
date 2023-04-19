@@ -13,13 +13,13 @@ async function setUser(user: string, score: any) {
     await set(ref(db, "users/" + u), score);
 }
 
-async function getUsers() {
+const getUsers = async () => {
 
     return await get(ref(db,"users/"));
 
 }
 
-async function getUserByUid(uid: any) {
+const getUserByUid = async (uid: any) => {
 
     return await get(ref(db,"users/" + uid));
 
