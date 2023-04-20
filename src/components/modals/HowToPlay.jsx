@@ -9,15 +9,16 @@ function HowToPlay() {
     const [username, setUsername] = useState("");
     const [isValid, setIsValid] = useState(false);
 
-    const onStart = () => {
+    const onStart = async () => {
         dispatch({ type: 'Reset' })
         localStorage.setItem("played", 'true')
         setUsername(username.replaceAll(" ",""))
         const infoUser = {
-            score : 0,
             name: username,
-        }
-        setUser(username, infoUser);
+            score : 0
+        };
+        await setUser(username, infoUser);
+
     }
 
     if (currentModal !== "HowToPlay") {

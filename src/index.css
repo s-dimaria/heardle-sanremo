@@ -193,3 +193,25 @@ body {
 .username:focus{
   outline: none;
 }
+
+.scrolling-cell {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 200px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(50%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animation {
+  animation-name: scroll;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

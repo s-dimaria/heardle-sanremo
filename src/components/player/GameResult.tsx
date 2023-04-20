@@ -3,28 +3,10 @@ import copy from 'copy-to-clipboard';
 import NextTimer from "./NextTimer";
 import { useState, useEffect } from "react";
 import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_SPOTIFY_LIST_URL, HEARDLE_IT_WEB_URL } from "../game/Constants";
-import { getDayFormattedText } from "../utils";
+import { buildScore, getDayFormattedText } from "../utils";
 import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
 import Table from "./Scoreboard";
 
-
-const buildScore = (guessList: any[]): number => {
-  let max = 100;
-
-  // punti persi: 12, 10, 8, 6, 4
-  for (let i = 0; i < guessList.length; i++) {
-    if(guessList[i].isCorrect === true)
-        break;
-    if (guessList[i].isSkipped) {
-      max = max - ((guessList.length - i) * 2);
-    }
-    if (guessList[i].isCorrect === false) {
-      max = max - ((guessList.length - i) * 2);
-    }
-  }
-
-  return max;
-}
 
 const buildBoxIcons = (guessList: any[]) => {
   let icons = guessList.map(function(item, i){
@@ -181,7 +163,7 @@ function GameResult({ songConfig }: { songConfig: any }) {
           <p className="text-custom-line text-lg mb-2">Classifica della settimana!</p>
         </div>
         <div className="flex justify-center text-custom-line mb-5">
-          <Table></Table>
+          <Table/>
         </div>
         <div className="text-center pb-3">
               <div className="bg-indigo-800 items-center text-indigo-100 leading-none rounded-full flex inline-flex mt-3" role="alert">

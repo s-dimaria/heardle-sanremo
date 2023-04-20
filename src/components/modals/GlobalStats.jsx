@@ -1,6 +1,6 @@
 import { useModalData } from "./ModalContext";
 import { useEffect } from 'react';
-import Table from "../player/Scoreboard";
+import GlobalTable from "./GlobalTable";
 
 function GlobalStats() {
 
@@ -29,7 +29,7 @@ function GlobalStats() {
                      </button>
                   </div>
                </div>
-               <Table/>
+               <GlobalTable/>
             </div>
          </div>
       </div>

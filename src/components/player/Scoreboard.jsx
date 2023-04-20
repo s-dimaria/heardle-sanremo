@@ -1,49 +1,110 @@
-import { useEffect, useState } from "react";
-import { getUsers, getUserByUid } from "../utils/firebaseRealtime";
+import { useEffect, useState, useRef } from "react";
+import { getDB, getUsers, getUserByUid } from "../utils/firebaseRealtime";
 import LoadingSpinner from '../LoadingSpinner';
 import {icon} from "../game/Constants";
+import { buildScore } from "../utils";
+
+import { useGameData } from "./GameContext";
 // evidenziare riga se UID corrisponde a quello dell'utente
 
 
 function Table() {
 
   const myUID = localStorage.getItem("uid");
+
   const [users, setUsers] = useState([])
-  const [user, setUser] = useState(null)
+
   const [pos, setPos] = useState(-1)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
+
+  const { dispatch, state: { guessList } } = useGameData();
+
+  let todayScore = buildScore(guessList);
+
+  const [bests, setBests] = useState([]);
+
 
   useEffect(() => {
-
-      setLoading(true)
-
+      
       async function fetchData() {
+        
+          setUsers(await getUsers().then((value) => {
+            let records = [];
+            let bests = [];
+            value.forEach((key) => {
+                let k = key.key;
+                let data = key.val();
+                records.push({"uid": k, "data": data})
+            });
 
-        setUsers(await getUsers().then((value) => {
-          let records = [];
-          value.forEach((key) => {
-              let k = key.key;
-              let data = key.val();
-              records.push({"uid": k, "data": data})
-          });
+            let res = records.sort((a, b) => b.data.score-a.data.score);
+            
+            let SCORE = 0;
+            let LENGTH = 0;
+            for(let i = 0; i < 3 && LENGTH < res.length; i++) {
+              let SCORE = res[LENGTH].data.score;
+              
+              let allU = records.filter((a) => a.data.score == SCORE);
+              
+              LENGTH = LENGTH + allU.length;
+              bests.push({"key": i, "value": allU})
+              console.log(bests)
+            }
 
-          // UNICO PROBLEMA CHE NON CARICA CORRETTAMENTE USER E INDEX 
-          let res = records.sort((a, b) => b.data.score-a.data.score);
-          setPos(res.findIndex((d) => d.uid === myUID))
-          setUser(res.find((u) => u.uid === myUID))
-          return res;
-        }));
+            setBests(bests);
+            
+            setPos(res.findIndex((d) => d.uid === myUID))
 
-        //await getUserByUid(myUID).then((value) => {
-        //  setUser(value.val())
-        //});
-        setLoading(false);
+            return res;
+          }));
+        
+        setLoading(false)
     }
-
+    
     fetchData();
 
-  },[myUID, user])
+  },[])
+
   
+  const ScrollingTableRow = () => { 
+
+    let names = [];
+    for(let i = 0; i < bests.length; i++) {
+      let tmp = "";
+      for(let j = 0; j < bests[i].value.length; j++) {
+        tmp = bests[i].value.map(item => item.data.name).join(', ');
+      }
+      names.push(tmp);
+      console.log(names)
+  }
+ 
+  
+    return (
+      <>
+      {bests.map((value, i) => {
+              console.log(value.value);
+        return (
+          <tr>
+            <td className="border border-gray-400 px-4 py-1">{icon[i]}</td>        
+            <td className="border border-gray-400 py-1">
+              <div className="overflow-x-auto whitespace-nowrap scrolling-cell">
+                {       
+                <span
+                  className={`inline-block ${value.value.length > 1 ? 'animation' : ''}`}
+                > 
+                  {names[i]}
+                </span>
+              }
+              </div>
+            </td>
+            <td className="border border-gray-400 px-4 py-1">{value.value[0].data.score}</td>
+          </tr>
+          )})}
+      </>
+    );
+  };
+
+
 
     return (
       <>
@@ -59,29 +120,23 @@ function Table() {
               </tr>
             </thead>
             <tbody>
-            {users.slice(0,3).map((row, i) => {
-              return(
-                <tr>
-                  <td className="border border-gray-400 px-4 py-1">{icon[i]}</td>
-                  <td className="border border-gray-400 px-4 py-1">{row.data.name}</td>
-                  <td className="border border-gray-400 px-4 py-1">{row.data.score}</td>
-                </tr>
-              )
-            })}
+           
+            <ScrollingTableRow />
+   
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-              </tr>
-              <tr className="bg-white bg-opacity-10">
-                <td className="border border-gray-400 px-4 py-1">{pos+1 <= 3 ? icon[pos] : pos+1}</td> 
-                {
-                <>
-                  <td className="border border-gray-400 px-4 py-1">{user.data.name}</td>
-                  <td className="border border-gray-400 px-4 py-1">{user.data.score}<a className="text-green-500">+23</a></td>
-                </>
-                }
-              </tr>
+                </tr>
+                 <tr className="bg-white bg-opacity-10">
+                  <td className="border border-gray-400 px-4 py-1">{pos+1 < 3 ? icon[pos] : pos+1+"°"}</td> 
+                  {
+                  <>
+                    <td className="border border-gray-400 px-4 py-1">nome user</td>
+                    <td className="border border-gray-400 px-4 py-1">score<a className="text-green-500">+{todayScore}</a></td>
+                  </>
+                  }
+                </tr> 
             </tbody>
           </table>
         </div>

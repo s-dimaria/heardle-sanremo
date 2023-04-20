@@ -13,9 +13,13 @@ import { OnChangeValue } from "react-select";
 import { SongConfig } from "../game/SongConfig";
 import { getList } from "../utils/spotifyService";
 import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
+import { buildScore } from "../utils";
 
 
 function PlayerContainer({ songConfig, accessToken }: {songConfig: SongConfig, accessToken: string}) {
+
+    
+    const uid = localStorage.getItem("uid");
 
     const [answer, setAnswer] = useState("");
     const [selectedSong, setSelectedSong] = useState("");
@@ -31,15 +35,15 @@ function PlayerContainer({ songConfig, accessToken }: {songConfig: SongConfig, a
             return;
         }
 
-        let score = checkAnswer(songConfig, answer);
-        console.debug("checkAnswer ", score)
+        let win = checkAnswer(songConfig, answer);
+        console.debug("checkAnswer ", win)
 
-        if (score) {
+        if (win) {
             dispatch(({ type: "SUBMIT-CORRRECT", payload: { step: openedStep, answer: answer } }));
             updateScore();
         } else {
             dispatch(({ type: "SUBMIT-WRONG", payload: { step: openedStep, answer: answer } }));
-        }
+        }   
 
         setAnswer("");
         setSelectedSong("")
@@ -70,44 +74,22 @@ function PlayerContainer({ songConfig, accessToken }: {songConfig: SongConfig, a
         }
     };
 
-    
-    const buildScore = (guessList: any[]): number => {
-    let max = 100;
-
-    console.log("SCORE INIT: ", max)
-    // punti persi: 12, 10, 8, 6, 4
-    for (let i = 0; i < guessList.length; i++) {
-        if(guessList[i].isCorrect === true)
-            break;
-        if (guessList[i].isSkipped) {
-        max = max - ((guessList.length - i) * 2);
-        }
-        if (guessList[i].isCorrect === false) {
-        max = max - ((guessList.length - i) * 2);
-        }
-    }
-    console.log("SCORE FINAL: ", max)
-    return max;
-    }
-
+ 
     const updateScore = async() => {
 
         const uid = localStorage.getItem("uid");
-        const name = localStorage.getItem("user");
-        let points = buildScore(guessList)
-
-        let score = (await getUserByUid(uid)).val();
-        console.log(score)
-        score.score = score.score + points
+        let points = buildScore(guessList);
+        let user = (await getUserByUid(uid)).val();
+        user.score = user.score + points;
         if(uid != null)
-            updateUserByUid(uid, score);
+            updateUserByUid(uid, user);
     }
 
     return (
         <>
             {
                 finished ?
-                    (<GameResult songConfig={songConfig} />) :
+                    (<GameResult songConfig={songConfig}/>) :
                     (<GamePlayground />)
             }
             <MusicPlayer songConfig={songConfig} />
