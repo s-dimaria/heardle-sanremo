@@ -2,21 +2,22 @@ TODO:
 - [x] Inserire Username e salvarlo in locale ( Sanificare Input )
 - [X] Creare UID per utente
 - [X] Caricare nel DB a fine partita UID + Username + sum+score
-- [ ] Costruire Tabella top 3 alla fine + Your position
+- [X] Costruire Tabella top 3 alla fine + Your position
     - [X] UI
-    - [ ] Logica
+    - [X] Logica
 - [ ] resettare automaticamente il lunedi
 
 - [ ] change dominio
 
-- [X] Testare i punteggi (z?)
+- [X] Testare i punteggi
 - [ ] Nickname bannabili (??)
-- [ ] ( FINE ) Modificare il nome del file locale in modo che tutti si ritrovano a reinserire il nome.
+- [ ] ( FINE ) Modificare il nome del file locale in modo che tutti si ritrovano a reinserire il nome (aggiungere un altro file tipo played, per gli old gamers).
 
 EXTRA:
-- [ ] Perchè è uscito remasterd??
+- [X] Perchè è uscito remasterd??
 - [SI] al posto della classifica globale mettiamo il link a tutte le altre versioni? (INDIE, RAP, 90s..)
 
 PROBLEMS:
-- [ ] update degli users arriva in ritardo (codice in PLayerContainer)
-- [ ] posizione dell'utente rispetto alla classifica
+- [X] update degli users arriva in ritardo (codice in PLayerContainer)
+- [X] posizione dell'utente rispetto alla classifica
+- [ ] Usare un orologio del server e non quello locale

@@ -1,6 +1,6 @@
 import { getDayStr, getDayStrAsPath } from ".";
 import { SongConfig } from "../game/SongConfig";
-import { artists } from "../utils/constants";
+import { artists, banWords } from "../utils/constants";
 import { getDatabase, ref, onValue, set } from "firebase/database";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 import "./firebase";
@@ -51,9 +51,8 @@ async function fetchSong(accessToken:string, artist: string): Promise<any> {
 }
 
 
-
 export const getDailySong = (accessToken: string): Promise<any> => {
-    const banWords = ["rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session"];	// words to filter out
+   
     let day = getDayStr()
 
     let artist = artists[Math.floor(Math.random() * artists.length)];

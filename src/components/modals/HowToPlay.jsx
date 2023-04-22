@@ -28,7 +28,7 @@ function HowToPlay() {
     const onChanged = (event) => {
         const name = event.target.value;
 
-        const regex = /^(?!\s*$)[a-zA-Z\s]{0,24}$/;
+        const regex = /^(?!\s*$)[a-zA-Z0-9\s!?\-_$@&]{0,24}$/;
         if (regex.test(name) || name === '') {
             setUsername(name.slice(0, 24));
         }

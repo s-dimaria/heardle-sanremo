@@ -198,3 +198,16 @@ export const artists = [
     "colapesce",
     "baby k"
 ]
+
+export const versions = [
+    {name:"INDIE", url: "http://indie.heardle.it/"},  
+    {name:"ROCK", url: ""},  
+    {name:"POP", url: ""}
+]
+
+export const banWords = [
+    "rmx","unplugged", "reprise","remaster", "live", "remix", 
+    "mix", "version", "edit", "remastered", "concert", "concerto", 
+    "live", "studio", "registrazione", "dal vivo", "strumentale", 
+    "session", "sanremo", "karaoke"
+];

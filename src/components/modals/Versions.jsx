@@ -1,12 +1,12 @@
 import { useModalData } from "./ModalContext";
 import { useEffect } from 'react';
-import GlobalTable from "./GlobalTable";
+import AllVersions from "./AllVersions";
 
-function GlobalStats() {
+function Versions() {
 
     const { dispatch, state: { currentModal } } = useModalData();
 
-   if (currentModal !== "GlobalStats") {
+   if (currentModal !== "Versions") {
       return <></>
    }
 
@@ -16,7 +16,7 @@ function GlobalStats() {
             <div className="bg-custom-bg border border-custom-mg p-6 rounded">
                <div className="flex items-center justify-center mb-6">
                   <div className="flex-1 pl-7">
-                     <h2 className="text-sm text-center uppercase text-custom-line font-semibold tracking-widest">CLASSIFICA GLOBALE</h2>
+                     <h2 className="text-sm text-center uppercase text-custom-line font-semibold tracking-widest">SCOPRI ALTRE VERSIONI</h2>
                   </div>
                   <div className="justify-self-end flex">
                      <button autofocus="" className="border-none text-custom-mg" type="button" aria-label="Kapat" title="Kapat"
@@ -29,7 +29,7 @@ function GlobalStats() {
                      </button>
                   </div>
                </div>
-               <GlobalTable/>
+               <AllVersions/>
             </div>
          </div>
       </div>
@@ -37,4 +37,4 @@ function GlobalStats() {
    );
 }
 
-export default GlobalStats;
+export default Versions;
