@@ -4,17 +4,6 @@ import { useState, useEffect } from "react";
 function Header() {
 
     const { dispatch } = useModalData();
-    const [uid, setUid] = useState("");
-
-    useEffect(() => {
-        
-        setUid(localStorage.getItem("uid"));
-        
-        return () => {
-            setUid("");
-        }
-        
-      });
 
     const openAbout = () => {
         dispatch({ type: 'About' })
@@ -32,8 +21,8 @@ function Header() {
         dispatch({ type: 'HowToPlay' })
     }
 
-    const openGlobalStats = () => {
-        dispatch({ type: 'GlobalStats' })
+    const openVersion = () => {
+        dispatch({ type: 'Versions' })
     }
 
     return (
@@ -78,11 +67,10 @@ function Header() {
                             {uid? 
                             <button
                                 className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
-                                onClick={openGlobalStats} type="button" aria-label="Come giocare" title="Come giocare">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 172 172" fill="white">
-                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                    <path d="M21.5,21.5v129h64.5v-32.25v-64.5v-32.25zM86,53.75c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25c-17.7805,0 -32.25,14.4695 -32.25,32.25zM118.25,86c-17.7805,0 -32.25,14.4695 -32.25,32.25c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25z">
-                                    </path>
+                                onClick={openVersion} type="button" aria-label="Nuove Modalità" title="Nuove modalità">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                                    <animate attributeName="opacity" from="1" to="0.5" dur="1s" repeatCount="indefinite" />
                                 </svg>
                             </button>:
                             <button
