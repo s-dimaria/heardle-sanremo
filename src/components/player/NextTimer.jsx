@@ -4,6 +4,12 @@ function NextTimer() {
     const [countDown, setCountDown] = useState();
     const [countDownTitle, setCountDownTitle] = useState();
 
+    fetch('https://worldtimeapi.org/api/timezone/Europe/Rome').then((response) => {
+        response.json().then((data) => {
+            console.log(data.datetime);
+        })
+    })  
+
     useEffect(() => {
         let current = new Date();
         let countDownDate = current.setHours(23, 59, 59, 999);
