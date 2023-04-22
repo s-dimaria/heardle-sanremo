@@ -82,7 +82,6 @@ export const getList = (token: string, inputValue: string, callback: (res: any[]
                   // console.info(track.artists[0].name.toLowerCase())
                   var value = new RegExp(banWords.join('|')).test(track.name.toLowerCase());
                   if(artists.includes(track.artists[0].name.toLowerCase()) && !value) {
-                    
                     let id = track.artists[0].name + track.name;
                     id = id.replaceAll(" ","");
                     // let id = track.duration_ms.toString() + track.artists[0].name.substring(0,3);

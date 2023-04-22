@@ -4,17 +4,26 @@ import { artists } from "../utils/constants";
 import { getDatabase, ref, onValue, set } from "firebase/database";
 import "./firebase";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { valueContainerCSS } from "react-select/dist/declarations/src/components/containers";
 
 
 interface Map {
     [key: string]: any
 }
 
+const ERROR = {
+    name: "ERROR",
+    artists: [
+        {name : "ERROR"}
+    ],
+    preview_url: "https://example.com",
+}
+
 const DEFAULT_SONG = {
     day: "",
     songLength: 30,
     breaks: [1, 2, 4, 8, 16, 30],
-    trackName: "Elisa Litoranea",
+    trackName: "Elisa Litoranea-",
     others: ["Elisa Litoranea (con Matilda De Angelis)"],
     song: "Litoranea",
     artist: "Elisa",
@@ -54,7 +63,7 @@ async function fetchSong(accessToken:string, artist: string): Promise<any> {
 
 
 export const getDailySong = (accessToken: string): Promise<any> => {
-    const banWords = ["rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session"];	// words to filter out
+    const banWords = ["sanremo", "rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session", "original"];	// words to filter out
     let day = getDayStr()
 
     let artist = artists[Math.floor(Math.random() * artists.length)];
@@ -71,18 +80,20 @@ export const getDailySong = (accessToken: string): Promise<any> => {
         const database = getDatabase();
 
         let selectedSong: any;
-        var value: any;
+        var value: boolean = true;
+
         do {
-         selectedSong = await fetchSong(accessToken, artist);
-         value = new RegExp(banWords.join('|')).test(selectedSong.name.toLowerCase());
-        }while(selectedSong.preview_url != null && selectedSong.artists[0].name.toLowerCase() != artist && !value)
-      
-
-        /*console.log(selectedSong)
-        console.log(selectedSong.artists[0].name.toLowerCase() + " " + artist)
-        console.log(selectedSong.artists[0].name.toLowerCase() === artist)
-        */
-
+        selectedSong = await fetchSong(accessToken, artist).then((song) => {
+            value = new RegExp(banWords.join('|')).test(song.name.toLowerCase());
+            value ? console.debug("rejected: "+ value) : null;
+            return value ? ERROR: song;
+        });
+        //(selectedSong != ERROR) ? console.debug("PRIMA " + selectedSong.name) : console.debug("ERROR" + selectedSong.name)
+            console.debug("Preview url:" + (selectedSong.preview_url != null))
+            console.debug("Compared: " + (selectedSong.artists[0].name.toLowerCase() != artist))
+            console.debug("filtered: " + value)
+        }while(value && selectedSong.preview_url != null && selectedSong.artists[0].name.toLowerCase() != artist)
+        
         let song = selectedSong.name.includes("-") ? selectedSong.name.substring(0, selectedSong.name.indexOf("-")) :
         selectedSong.name.includes("(") ? selectedSong.name.substring(0, selectedSong.name.indexOf("(")) : selectedSong.name;
 

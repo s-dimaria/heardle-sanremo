@@ -145,7 +145,7 @@ export const artists = [
     "gianni celeste",
     "mina",
     "anna tatangelo",
-    "gianni giannini",
+    "gianna nannini",
     "noemi",
     "marco carta",
     "valerio scanu",
