@@ -2,18 +2,11 @@ import { useEffect, useState } from "react";
 
 function NextTimer() {
     const [countDown, setCountDown] = useState();
-    const [countDownTitle, setCountDownTitle] = useState();
-
-    fetch('https://worldtimeapi.org/api/timezone/Europe/Rome').then((response) => {
-        response.json().then((data) => {
-            console.log(data.datetime);
-        })
-    })  
+    const [countDownTitle, setCountDownTitle] = useState(); 
 
     useEffect(() => {
         let current = new Date();
         let countDownDate = current.setHours(23, 59, 59, 999);
-        // let countDownDate = current.setHours(16, 1, 0, 999);
         let lastMinute = 0;
 
         let interval = setInterval(function () {
