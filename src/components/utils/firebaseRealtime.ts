@@ -31,6 +31,7 @@ const getUserByUid = async (uid: any) => {
 
 }
 
+
 async function updateUserByUid(uid: any, score: any) {
     await update(ref(db, "users/" + uid), score);
 }

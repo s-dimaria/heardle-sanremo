@@ -4,6 +4,17 @@ import { useState, useEffect } from "react";
 function Header() {
 
     const { dispatch } = useModalData();
+    const [uid, setUid] = useState("");
+
+    useEffect(() => {
+        
+        setUid(localStorage.getItem("uid"));
+        
+        return () => {
+            setUid("");
+        }
+        
+      });
 
     const openAbout = () => {
         dispatch({ type: 'About' })
