@@ -7,7 +7,6 @@ import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_SPOTIFY_LIST_
 import { buildScore, getDayFormattedText } from "../utils";
 import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
 import Table from "./Scoreboard";
-import Banner from "../Banner";
 
 
 const buildBoxIcons = (guessList: any[]) => {
@@ -183,7 +182,7 @@ function GameResult({ songConfig }: { songConfig: any }) {
           </div>
           <NextTimer />
           <NextTimerScore />
-          <Banner/>
+          {/* <Banner/> */}
 
 
         </div>
