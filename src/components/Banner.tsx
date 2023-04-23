@@ -1,31 +1,32 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react';
 
 
-export default function Banner(): JSX.Element {
-    
-    const banner = useRef<HTMLDivElement>(null)
+const loadScript = (src:any) => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.setAttribute('data-cfasync', 'false');
+      script.onload = () => resolve(src);
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.body.appendChild(script);
+    });
+  };
 
-    const atOptions = {
-		key : 'd8eda912a7485ab7f3da1d35bd959721',
-		format : 'iframe',
-		height : 90,
-		width : 728,
-		params : {}
-	}
-    useEffect(() => {
-    if (!banner.current?.firstChild) {
-        const conf = document.createElement('script')
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = `//www.effectivecreativeformat.com/${atOptions.key}/invoke.js`
-        conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`
 
-        if (banner.current) {
-            banner.current.append(conf)
-            banner.current.append(script)
-        }
-    }
-}, [])
 
-    return <div ref={banner}></div>
-}
+const ExternalScriptComponent = () => {
+  useEffect(() => {
+    loadScript('//ophoacit.com/1?z=5894500')
+      .then(() => console.log('Script loaded successfully'))
+      .catch((error) => console.error('Failed to load the script:', error));
+  }, []);
+
+  return (
+    <div></div>
+  );
+};
+
+export default ExternalScriptComponent;
+
+
