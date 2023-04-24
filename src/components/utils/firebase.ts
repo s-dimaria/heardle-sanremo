@@ -22,7 +22,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_KEY,
+  apiKey: "AIzaSyAtjRSPq-Pt8dCMBOQiclgZv3oaEK1wn9A",
   authDomain: "heardleita.firebaseapp.com",
   databaseURL: "https://heardleita-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "heardleita",
