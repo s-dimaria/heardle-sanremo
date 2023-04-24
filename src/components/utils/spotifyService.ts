@@ -2,7 +2,6 @@ import { resolveCaa } from "dns";
 import { useState } from "react";
 import { artists } from "../utils/constants";
 
-const CLIENT_BASE64 = "Y2ZhZmZmNTM0YjA5NDQ5NTkyNDI4OTk3ZTc4YWNmMzg6M2ZkOWI1ZjNlMmU1NGQyNWFlZGU3ODYyMjczMWNmYjc="
 
 type artist = {
   name: string
@@ -23,7 +22,7 @@ export const getAccessToken = (): Promise<any> => {
     console.log("Load access...")
 
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic " + CLIENT_BASE64);
+    myHeaders.append("Authorization", "Basic " + process.env.CLIENT_BASE64);
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "__Host-device_id=AQDPZSmHH_wn9eUQvhLOXgZ6dX2N_ADW-WOhrV5i0uBaLxJqODRvMyT9FeFAp7IZsoqpHUkWt94rWJMzQz6pblraDVkFMLAgEHA; sp_tr=false");
     
