@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { resetAllScoreOfUsers } from "../utils/firebaseRealtime";
 
 function NextTimerScore() {
   const [countDown, setCountDown] = useState();
@@ -23,89 +24,53 @@ function NextTimerScore() {
     const nextMonday = new Date(
       today.getFullYear(),
       today.getMonth(),
-      today.getDate() + ((1 + 7 - today.getDay()) % 7)
+      today.getDate() + ((7 - today.getDay()) % 7)
     );
 
-    const timeout = setInterval(() => {
+    let interval = setInterval(function() {
+      console.debug("");
+      console.debug("===== CLIENT SIDE ====");
+      let now = new Date();
+      // now -> server date
+      let timeUntilMonday = nextMonday.getTime() - now.getTime();
+
+      let days = Math.floor(timeUntilMonday / (1000 * 60 * 60 * 24));
+      let hours = Math.floor(
+        (timeUntilMonday % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      let minutes = Math.floor(
+        (timeUntilMonday % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      let seconds = Math.floor((timeUntilMonday % (1000 * 60)) / 1000);
+
+      console.debug(
+        today.toLocaleDateString("it-IT") +
+          " -> " +
+          nextMonday.toLocaleDateString("it-IT") +
+          " mancano:"
+      );
+      console.debug(
+        days +
+          " giorni " +
+          hours +
+          " ore " +
+          minutes +
+          " min " +
+          seconds +
+          " sec"
+      );
+
+      if (timeUntilMonday < 0) {
+        clearInterval(interval);
+        setTimeout(() => {
+           console.debug("---- RESET SCORE ----")
+           resetAllScoreOfUsers();
+        }, 1500);
+      }  
       
-            console.log("");
-            console.log("===== CLIENT SIDE ====");
-            const now = new Date();
-            const timeUntilMonday = nextMonday.getTime() - now.getTime();
+    } , 1000);
 
-            let days = Math.floor(timeUntilMonday / (1000 * 60 * 60 * 24));
-            let hours = Math.floor(
-              (timeUntilMonday % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            );
-            let minutes = Math.floor(
-              (timeUntilMonday % (1000 * 60 * 60)) / (1000 * 60)
-            );
-            let seconds = Math.floor((timeUntilMonday % (1000 * 60)) / 1000);
-
-            console.log(
-              today.toLocaleDateString("it-IT") +
-                " -> " +
-                nextMonday.toLocaleDateString("it-IT") +
-                " mancano:"
-            );
-            console.log(
-              days +
-                " giorni " +
-                hours +
-                " ore " +
-                minutes +
-                " min " +
-                seconds +
-                " sec"
-            );
-
-            // QUESTO CONTROLLO VA A INIZIO PARTITA, NON ALLA FINE!
-            console.log("");
-            console.log("===== SERVER SIDE ====");
-            const serverTmpDate = new Date(serverDate.datetime);
-
-            console.log("Client: " + now.toDateString() + " - Server: " + serverTmpDate.toDateString())
-            if (now.toDateString() === serverTmpDate.toDateString()) {
-              const nextServerMonday = new Date(
-                serverTmpDate.getFullYear(),
-                serverTmpDate.getMonth(),
-                serverTmpDate.getDate() + ((1 + 7 - serverTmpDate.getDay()) % 7)
-              );
-              const timeUntilServerMonday =
-                nextServerMonday.getTime() - serverTmpDate.getTime();
-
-              days = Math.floor(timeUntilServerMonday / (1000 * 60 * 60 * 24));
-              hours = Math.floor(
-                (timeUntilServerMonday % (1000 * 60 * 60 * 24)) /
-                  (1000 * 60 * 60)
-              );
-              minutes = Math.floor(
-                (timeUntilServerMonday % (1000 * 60 * 60)) / (1000 * 60)
-              );
-              seconds = Math.floor(
-                (timeUntilServerMonday % (1000 * 60)) / 1000
-              );
-
-              console.log(
-                serverTmpDate.toLocaleDateString("it-IT") +
-                  " -> " +
-                  nextServerMonday.toLocaleDateString("it-IT") +
-                  " mancano:"
-              );
-              console.log(
-                days +
-                  " giorni " +
-                  hours +
-                  " ore " +
-                  minutes +
-                  " min " +
-                  seconds +
-                  " sec"
-              );
-            }
-    }, 1000);
-
-    return () => clearInterval(timeout);
+    return () => clearInterval(interval);
   });
 
   return <></>;

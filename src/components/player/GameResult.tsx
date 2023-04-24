@@ -58,13 +58,13 @@ const getSpeakerIcon = (score: number) => {
 
 const getResultIcons = (guessList: any[]) => {
   let score = buildScore(guessList);
-  console.log("score:", score)
+  console.debug("score:", score)
   return buildResultIcons(guessList);
 }
 
 const getBoxIcons = (guessList: any[]) => {
   let score = buildScore(guessList);
-  console.log("score:", score)
+  console.debug("score:", score)
   return getSpeakerIcon(score) + buildBoxIcons(guessList);
 }
 

@@ -200,9 +200,9 @@ export const artists = [
 ]
 
 export const versions = [
-    {name:"INDIE", url: "http://indie.heardle.it/"},  
-    {name:"ROCK", url: ""},  
-    {name:"POP", url: ""}
+    {name:"INDIE", url: "http://indie.heardle.it/", tag: ""},  
+    {name:"ROCK", url: "", tag: "Coming Soon"},  
+    {name:"90s", url: "", tag: "Coming Soon"}
 ]
 
 export const banWords = [

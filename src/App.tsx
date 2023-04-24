@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getDailySong } from "./components/utils/dataService";
 import { getAccessToken } from "./components/utils/spotifyService";
 import { SongConfig } from "./components/game/SongConfig";
-import { getDayStr } from "./components/utils";
+import Error from "./components/Error";
 
 const APP_VERSION = process.env.REACT_APP_VERSION || "0"
 console.debug("v" + APP_VERSION);
@@ -32,6 +32,8 @@ function App() {
 
   const [accessToken, setAccessToken] = useState("");
 
+  const [verify, setVerify] = useState(false);
+
   useEffect(() => {
     getAccessToken().then((value: any) => {
       setAccessToken(value);
@@ -43,13 +45,50 @@ function App() {
      
   }, [])
 
+  useEffect(() => {
+    console.debug("===== SERVER DATE CONTROL ====");
+    fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
+      (response) => {
+        response.json().then((data) => {
+
+          const today = new Date();
+          const serverTmpDate = new Date(data.datetime);
+
+          console.debug("Client: " + today.toDateString() + " - Server: " + serverTmpDate.toDateString())
+          if (today.toDateString() !== serverTmpDate.toDateString()) {
+              setVerify(true)
+          } 
+          else {
+            setVerify(false)
+          }
+        });
+      }
+    );
+  }, []);
+
+ /*  useEffect(() => {
+    const today = new Date();
+
+    console.log("");
+    console.log("===== SERVER DATE CONTROL ====");
+    const serverTmpDate = new Date(serverDate);
+
+    console.log("Client: " + today.toDateString() + " - Server: " + serverTmpDate.toDateString())
+    if (today.toDateString() === serverTmpDate.toDateString()) {
+
+        console.log("UGUALI")
+    } 
+
+  }); */
+
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
       <ModalContextProvider>
         <Header />
         <AllModals />
       </ModalContextProvider>
-      <GameContextProvider>
+      { verify ? <Error></Error> :
+      <GameContextProvider verify={verify}>
         {
           loading ?
             <>
@@ -65,6 +104,7 @@ function App() {
             )
         }
       </GameContextProvider>
+  }
     </div>
   );
 }

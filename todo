@@ -5,12 +5,15 @@ TODO:
 - [X] Costruire Tabella top 3 alla fine + Your position
     - [X] UI
     - [X] Logica
-- [ ] resettare automaticamente il lunedi
+- [ ] Usare un orologio del server e non quello locale
+    - [X] resettare automaticamente il lunedi
+    - [ ] aggiornare serverTime per il reset degli score
 
 - [ ] change dominio
 
 - [X] Testare i punteggi
-- [ ] Nickname bannabili (??)
+- [ ] Nickname bannabili (https://github.com/words/cuss)
+
 - [ ] ( FINE ) Modificare il nome del file locale in modo che tutti si ritrovano a reinserire il nome (aggiungere un altro file tipo played, per gli old gamers).
 
 EXTRA:
@@ -20,4 +23,3 @@ EXTRA:
 PROBLEMS:
 - [X] update degli users arriva in ritardo (codice in PLayerContainer)
 - [X] posizione dell'utente rispetto alla classifica
-- [ ] Usare un orologio del server e non quello locale

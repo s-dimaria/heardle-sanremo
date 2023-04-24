@@ -96,18 +96,19 @@ function editDistance(s1: string, s2: string) {
 const buildScore = (guessList: any[]): number => {
     let max = 100;
     let points = [82, 68, 54, 36, 12];
-
+    let i;
+    
     // punti persi: 12, 10, 8, 6, 4
-    for (let i = 0; i < guessList.length; i++) {
-        if(i+1 == guessList.length)
-            return 0;
+    for (i = 0; i < guessList.length; i++) {
         if(guessList[i].isCorrect === true)
             break; 
         if (guessList[i].isSkipped || guessList[i].isCorrect === false) {
             max = points[i];
         }
-
     }
+
+    if(i == 6)
+        return 0;
 
     return max;
 }

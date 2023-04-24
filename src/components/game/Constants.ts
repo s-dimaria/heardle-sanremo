@@ -17,3 +17,5 @@ export const STRING_COMPARE_LOCALE = "it";
 export const SILENT_SONG = "https://w.soundcloud.com/player/?url=" + "https://soundcloud.com/bdsls01/silence-of-the-innocent";
 
 export const icon = ["🥇","🥈","🥉"]
+
+export const errorString = "Oops... qualcosa è andato storto! Controlla le tue impostazioni di data e ora e riprova!";

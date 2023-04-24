@@ -36,4 +36,14 @@ async function updateUserByUid(uid: any, score: any) {
     await update(ref(db, "users/" + uid), score);
 }
 
-export {getDB, setUser, getUsers, getUserByUid, updateUserByUid};
+async function resetAllScoreOfUsers() {
+    await get(ref(db, "users/")).then((snapshot) => {
+        snapshot.forEach((u) => {
+            update(ref(db,"users/" + u.key), {score: 0})
+        })
+    });
+}
+
+
+
+export {getDB, setUser, getUsers, getUserByUid, updateUserByUid, resetAllScoreOfUsers};
