@@ -52,10 +52,10 @@ function App() {
         response.json().then((data) => {
 
           const today = new Date();
-          const serverTmpDate = new Date(data.datetime);
+          const serverTmpDate = new Date(Date.parse(data.datetime));
 
-          console.debug("Client: " + today.toDateString() + " - Server: " + serverTmpDate.toDateString())
-          if (today.toDateString() !== serverTmpDate.toDateString()) {
+          console.debug("Client: " + today.toISOString().substring(0,11) + " - Server: " + serverTmpDate.toISOString().substring(0,11))
+          if (today.toISOString().substring(0,11) !== serverTmpDate.toISOString().substring(0,11)) {
               setVerify(true)
           } 
           else {
@@ -65,21 +65,6 @@ function App() {
       }
     );
   }, []);
-
- /*  useEffect(() => {
-    const today = new Date();
-
-    console.log("");
-    console.log("===== SERVER DATE CONTROL ====");
-    const serverTmpDate = new Date(serverDate);
-
-    console.log("Client: " + today.toDateString() + " - Server: " + serverTmpDate.toDateString())
-    if (today.toDateString() === serverTmpDate.toDateString()) {
-
-        console.log("UGUALI")
-    } 
-
-  }); */
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">

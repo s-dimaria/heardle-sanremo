@@ -5,14 +5,14 @@ TODO:
 - [X] Costruire Tabella top 3 alla fine + Your position
     - [X] UI
     - [X] Logica
-- [ ] Usare un orologio del server e non quello locale
+- [x] Usare un orologio del server e non quello locale
     - [X] resettare automaticamente il lunedi
-    - [ ] aggiornare serverTime per il reset degli score
+    - [x] aggiornare serverTime per il reset degli score
 
 - [ ] change dominio
 
 - [X] Testare i punteggi
-- [ ] Nickname bannabili (https://github.com/words/cuss)
+- [x] Nickname bannabili (https://github.com/words/cuss)
 
 - [ ] ( FINE ) Modificare il nome del file locale in modo che tutti si ritrovano a reinserire il nome (aggiungere un altro file tipo played, per gli old gamers).
 

@@ -4123,6 +4123,11 @@ csstype@^3.0.2:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.1.tgz"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
+cuss@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/cuss/-/cuss-2.1.0.tgz"
+  integrity sha512-xqMndOHDNnwJFjqhVyMvH2ETnNN3p10C2vcndvNVc2DDDTDIAKMws3ZF/HR2q0d25eFi5sTKJPQRP/mcbhhAOA==
+
 damerau-levenshtein@^1.0.8:
   version "1.0.8"
   resolved "https://registry.npmjs.org/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz"

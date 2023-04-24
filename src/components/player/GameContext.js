@@ -215,7 +215,6 @@ function modalReducer(state, action) {
 
 function GameContextProvider({ verify, children }) {
 
-    let day = getDayStr();
     //load from localstorage
     const [state, dispatch] = React.useReducer(modalReducer, loadState())
     const value = {state, dispatch}

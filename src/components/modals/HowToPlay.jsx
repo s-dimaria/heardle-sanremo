@@ -1,6 +1,7 @@
 import { useModalData } from "./ModalContext";
 import { useState } from "react";
 import { setUser } from "../utils/firebaseRealtime";
+import {cuss} from 'cuss/it';
 
 
 function HowToPlay() {
@@ -10,13 +11,15 @@ function HowToPlay() {
     const [isValid, setIsValid] = useState(false);
 
     const onStart = async () => {
+       
         dispatch({ type: 'Reset' })
         localStorage.setItem("played", 'true')
-        setUsername(username.replaceAll(" ",""))
+ 
         const infoUser = {
             name: username,
             score : 0
         };
+
         await setUser(username, infoUser);
 
     }
@@ -30,13 +33,21 @@ function HowToPlay() {
 
         const regex = /^(?!\s*$)[a-zA-Z0-9\s!?\-_$@&]{0,24}$/;
         if (regex.test(name) || name === '') {
-            setUsername(name.slice(0, 24));
+            setUsername(name);
         }
 
-        if(name.length >= 3)
+        if(name.length >= 3) {
+            for(const key in cuss) {
+                if (name.replaceAll(" ","").includes(key.replaceAll(" ","")) || key.replaceAll(" ","").includes(name.replaceAll(" ",""))) {
+                    setIsValid(false)
+                    return
+                    }
+            }
             setIsValid(true)
+        }
         else
             setIsValid(false)
+     
     }
 
     return (

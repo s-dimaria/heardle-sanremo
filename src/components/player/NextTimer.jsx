@@ -3,16 +3,30 @@ import { useEffect, useState } from "react";
 function NextTimer() {
     const [countDown, setCountDown] = useState();
     const [countDownTitle, setCountDownTitle] = useState(); 
+    const [serverDate, setServerDate] = useState("");
 
     useEffect(() => {
-        let current = new Date();
+        fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
+            (response) => {
+            response.json().then((data) => {
+                setServerDate(new Date(data.datetime));
+            });
+            }
+        );
+    }, []);
+
+    useEffect(() => {
+        let today = new Date(serverDate);
+        let current = new Date(serverDate);
         let countDownDate = current.setHours(23, 59, 59, 999);
+
         let lastMinute = 0;
 
-        let interval = setInterval(function () {
-
-            let now = new Date().getTime();
-            let timeLeft = countDownDate - now;
+        let interval = setInterval(function() {
+            console.debug("");
+            console.debug("===== SERVER TIMER NEXT ====");
+    
+            let timeLeft = countDownDate - today.getTime();
 
             if (timeLeft >= 0) {
                 let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -25,6 +39,15 @@ function NextTimer() {
 
                 const result = hours + ":" + minutes + ":" + seconds;
                 setCountDown(result);
+
+                  console.debug(
+                      hours +
+                      " ore " +
+                      minutes +
+                      " min " +
+                      seconds +
+                      " sec"
+                  );
 
                 if (lastMinute !== minutes) {
                     const resultDetailed = hours + " ore " + minutes + " minuti ";
@@ -39,6 +62,10 @@ function NextTimer() {
                     window.location.reload(true);
                 }, 2000);
             }
+
+            
+            today.setSeconds(today.getSeconds() + 1);
+            setServerDate(today)
 
         }, 1000);
 
