@@ -1,4 +1,5 @@
-import { artists, banWords } from "../utils/constants";
+import { banWords } from "../game/Constants";
+import { artists } from "../utils/artists";
 
 type artist = {
   name: string
@@ -66,7 +67,7 @@ export const getList = (token: string, inputValue: string, callback: (res: any[]
                     return (track && track.artists[0].name.indexOf("unknown") === -1 && track.name.indexOf("unknown") === -1)
                 })
                 .map((track: SpotifyResult) => {
-                  // console.info(track.artists[0].name.toLowerCase())
+                  
                   var value = new RegExp(banWords.join('|')).test(track.name.toLowerCase());
                   if(artists.includes(track.artists[0].name.toLowerCase()) && !value) {
                     

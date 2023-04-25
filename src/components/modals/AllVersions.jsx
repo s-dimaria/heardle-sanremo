@@ -1,4 +1,4 @@
-import { versions } from "../utils/constants";
+import { versions } from "../game/Constants";
 
 
 function AllVersions() {
@@ -6,9 +6,9 @@ function AllVersions() {
   return (
     <>
       <p className="text-sm text-center uppercase text-custom-line font-semibold tracking-widest">Se ti piace Heardle Italia, adorerai :</p>
-      {versions.map((v) => {
+      {versions.map((v,i) => {
         return (
-        <div className="text-center pb-3">
+        <div className="text-center pb-3" key={i}>
           <div className="bg-indigo-800 items-center text-indigo-100 leading-none rounded-full flex inline-flex mt-3" role="alert">
             <span className= {
               v.tag != "" ? "rounded-full bg-rose-600 uppercase px-2 py-1 text-xs font-bold mr-2":

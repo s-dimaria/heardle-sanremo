@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-// const ThemeContext = React.createContext({ currentModal: "HowToPlay" });
 const ModalContext = React.createContext();
 
 function modalReducer(state, action) {

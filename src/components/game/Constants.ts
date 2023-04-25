@@ -19,3 +19,16 @@ export const SILENT_SONG = "https://w.soundcloud.com/player/?url=" + "https://so
 export const icon = ["🥇","🥈","🥉"]
 
 export const errorString = "Oops... qualcosa è andato storto! Controlla le tue impostazioni di data e ora e riprova!";
+
+export const versions = [
+    {name:"INDIE", url: "http://indie.heardle.it/", tag: ""},  
+    {name:"ROCK", url: "", tag: "Coming Soon"},  
+    {name:"90s", url: "", tag: "Coming Soon"}
+]
+
+export const banWords = [
+    "rmx","unplugged", "reprise","remaster", "live", "remix", 
+    "mix", "version", "edit", "remastered", "concert", "concerto", 
+    "live", "studio", "registrazione", "dal vivo", "strumentale", 
+    "session", "sanremo", "karaoke", "vrs"
+];

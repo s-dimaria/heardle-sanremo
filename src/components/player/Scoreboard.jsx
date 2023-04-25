@@ -1,13 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import { getDB, getUsers, getUserByUid} from "../utils/firebaseRealtime";
+import { useEffect, useState } from "react";
+import { getDB } from "../utils/firebaseRealtime";
 import LoadingSpinner from '../LoadingSpinner';
 import {icon} from "../game/Constants";
 import { buildScore } from "../utils";
-import { onValue, ref} from "@firebase/database";
-
+import { onValue, ref } from "@firebase/database";
 import { useGameData } from "./GameContext";
-// evidenziare riga se UID corrisponde a quello dell'utente
-
 
 function Table() {
 
@@ -19,7 +16,7 @@ function Table() {
   const [pos, setPos] = useState(-1)
   const [loading, setLoading] = useState(false)
 
-  const { dispatch, state: { guessList } } = useGameData();
+  const { state: { guessList } } = useGameData();
 
   let todayScore = buildScore(guessList);
 
@@ -87,13 +84,6 @@ function Table() {
 
   
   const ScrollingTableRow = () => { 
-
-    /* 
-    console.log("-----------NO RT-----------")
-    console.log("USER: ")
-    sconsole.log(user)
-    console.log("USERS:")
-    console.log(users)  */
 
     console.debug("---------- RT -----------")
     console.debug("USER RT: ")

@@ -9,7 +9,6 @@ import { getAccessToken } from "./components/utils/spotifyService";
 import { SongConfig } from "./components/game/SongConfig";
 import Error from "./components/Error";
 import LoadingSpinner from "./components/LoadingSpinner";
-import { errorString } from "./components/game/Constants";
 
 const APP_VERSION = process.env.REACT_APP_VERSION || "0";
 console.debug("v" + APP_VERSION);
@@ -72,8 +71,6 @@ function App() {
       );
     });
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">

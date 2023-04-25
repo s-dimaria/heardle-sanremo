@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import { SILENT_SONG } from '../game/Constants';
-
 import PlayerProgress from "./PlayerProgress";
 import MusicPlayerControls from "./MusicPlayerControls";
 import { useGameData } from "../player/GameContext";

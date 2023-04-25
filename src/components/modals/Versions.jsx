@@ -1,5 +1,4 @@
 import { useModalData } from "./ModalContext";
-import { useEffect } from 'react';
 import AllVersions from "./AllVersions";
 
 function Versions() {
@@ -19,7 +18,7 @@ function Versions() {
                      <h2 className="text-sm text-center uppercase text-custom-line font-semibold tracking-widest">SCOPRI ALTRE VERSIONI</h2>
                   </div>
                   <div className="justify-self-end flex">
-                     <button autofocus="" className="border-none text-custom-mg" type="button" aria-label="Kapat" title="Kapat"
+                     <button autoFocus="" className="border-none text-custom-mg" type="button" aria-label="Kapat" title="Kapat"
                         onClick={() => { dispatch({ type: 'Reset' }) }}>
                         <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                            fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
