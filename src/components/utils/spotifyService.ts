@@ -1,8 +1,4 @@
-import { resolveCaa } from "dns";
-import { useState } from "react";
-import { artists } from "../utils/constants";
-
-const CLIENT_BASE64 = "Y2ZhZmZmNTM0YjA5NDQ5NTkyNDI4OTk3ZTc4YWNmMzg6M2ZkOWI1ZjNlMmU1NGQyNWFlZGU3ODYyMjczMWNmYjc="
+import { artists, banWords } from "../utils/constants";
 
 type artist = {
   name: string
@@ -14,8 +10,6 @@ type SpotifyResult = {
   name: string
 }
 
-const banWords = ["rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session"];	// words to filter out
-
 export const getAccessToken = (): Promise<any> => { 
 
     return new Promise<string>((resolve, reject) => {
@@ -23,19 +17,12 @@ export const getAccessToken = (): Promise<any> => {
     console.log("Load access...")
 
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic " + CLIENT_BASE64);
+    myHeaders.append("Authorization", "Basic " + process.env.REACT_APP_SPOTIFY_API_KEY);
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "__Host-device_id=AQDPZSmHH_wn9eUQvhLOXgZ6dX2N_ADW-WOhrV5i0uBaLxJqODRvMyT9FeFAp7IZsoqpHUkWt94rWJMzQz6pblraDVkFMLAgEHA; sp_tr=false");
     
     var urlencoded = new URLSearchParams();
     urlencoded.append("grant_type", "client_credentials");
-   
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: 'follow'
-    };
    
     fetch("https://accounts.spotify.com/api/token", 
     {

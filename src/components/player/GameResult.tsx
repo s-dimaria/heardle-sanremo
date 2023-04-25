@@ -5,7 +5,6 @@ import NextTimerScore from "./NextTimerScore";
 import { useState, useEffect } from "react";
 import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_SPOTIFY_LIST_URL, HEARDLE_IT_WEB_URL } from "../game/Constants";
 import { buildScore, getDayFormattedText } from "../utils";
-import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
 import Table from "./Scoreboard";
 
 
@@ -29,15 +28,15 @@ const buildBoxIcons = (guessList: any[]) => {
 const buildResultIcons = (guessList: any[]) => {
   let icons = guessList.map(function (item, i) {
     if (item.isSkipped) {
-      return <p className="w-4 h-1 mx-0.5 bg-custom-mg"></p>
+      return <p key={i} className="w-4 h-1 mx-0.5 bg-custom-mg"></p>
     }
     if (item.isCorrect) {
-      return <p className="w-4 h-1 mx-0.5 bg-custom-positive"></p>
+      return <p key={i} className="w-4 h-1 mx-0.5 bg-custom-positive"></p>
     }
     if (item.isSkipped === false && item.isCorrect === false && item.answer) {
-      return <p className="w-4 h-1 mx-0.5 bg-custom-negative"></p>
+      return <p key={i} className="w-4 h-1 mx-0.5 bg-custom-negative"></p>
     }
-    return <p className="w-4 h-1 mx-0.5 bg-custom-fg"></p>
+    return <p key={i} className="w-4 h-1 mx-0.5 bg-custom-fg"></p>
   });
 
   return icons;

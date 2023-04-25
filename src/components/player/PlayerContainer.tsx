@@ -18,8 +18,6 @@ import { buildScore } from "../utils";
 
 function PlayerContainer({ songConfig, accessToken }: {songConfig: SongConfig, accessToken: string}) {
 
-    
-    const uid = localStorage.getItem("uid");
 
     const [answer, setAnswer] = useState("");
     const [selectedSong, setSelectedSong] = useState("");
@@ -67,9 +65,8 @@ function PlayerContainer({ songConfig, accessToken }: {songConfig: SongConfig, a
     
     const handleInputChange = (newValue: OnChangeValue<any, any>) => {
         if (newValue) {
-            console.log(newValue)
             setSelectedSong(newValue);
-            console.log("value:", newValue.value)
+            console.debug("value:", newValue.value)
             setAnswer(newValue.value);
         }
     };

@@ -1,6 +1,4 @@
 import { useModalData } from "./ModalContext";
-import { useEffect } from 'react';
-
 
 const getDivScore = (scores, n) => {
     let mTot = matches(scores);
@@ -9,7 +7,6 @@ const getDivScore = (scores, n) => {
     
         // fails n = 6
         if (n === 6){ 
-            console.info("fails")
             let fails = scores.fails;
             let failsFract = fails/mTot;
             
@@ -30,7 +27,6 @@ const getDivScore = (scores, n) => {
 
         } 
 
-        console.info("scores")
         let score = scores.guessList[n].count;
         let scoreFract = score/mTot;
         switch (true) {

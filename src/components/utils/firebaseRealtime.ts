@@ -1,4 +1,4 @@
-import { getDatabase, ref, onValue, set, get, update} from "firebase/database";
+import { getDatabase, ref, set, get, update} from "firebase/database";
 import { uid } from "uid";
 import './firebase';
 

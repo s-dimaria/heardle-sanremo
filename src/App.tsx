@@ -12,6 +12,9 @@ import Error from "./components/Error";
 const APP_VERSION = process.env.REACT_APP_VERSION || "0"
 console.debug("v" + APP_VERSION);
 
+const FIREBASE_API = process.env.REACT_APP_FIREBASE_API_KEY
+console.debug("v" + FIREBASE_API);
+
 const currentVersion = localStorage.getItem("version");
 if (currentVersion !== APP_VERSION) {
   console.log(`version upgrated from ${currentVersion} to ${APP_VERSION}`)

@@ -30,9 +30,9 @@ function Table() {
 
     console.debug('getUsersRT')
 
+    setLoading(true)
     onValue(ref(getDB(),"users/"), (snapshot) => {
-        var users = [];
-        let records = [];
+        let users = [];
         let bests = [];
         snapshot.forEach((u) => {
             let k = u.key;
@@ -45,14 +45,13 @@ function Table() {
 
         setPos(res.findIndex((d) => d.uid === myUID))
 
-        let SCORE = 0;
         let LENGTH = 0;
         for(let i = 0; i < 3 && LENGTH < res.length; i++) {
           let SCORE = res[LENGTH].data.score;
           
           let allU = users.filter((a) => a.data.score == SCORE);
           
-          LENGTH = LENGTH + allU.length;
+          LENGTH += allU.length;
           bests.push({"key": i, "value": allU})
         }
 
@@ -63,13 +62,13 @@ function Table() {
         })
 
         setBests(bests);
-
+        setLoading(false);
     });
     
   }
 
   
-  function getUserRTByUid () {
+  function getUserRTByUid() {
 
     console.debug('getUserRTByUid')
 
@@ -78,12 +77,6 @@ function Table() {
         });
     
   }
-
-  const findPos = () => {
-    console.log(bests)
-    
-  }
-
 
   useEffect(() => {
       
@@ -125,7 +118,7 @@ function Table() {
       <>
       {bests.map((value, i) => {
         return (
-          <tr>
+          <tr key={value.value[0].uid}>
             <td className="border border-gray-400 px-4 py-1">{icon[i]}</td>        
             <td className="border border-gray-400 py-1">
               <div className="overflow-x-auto whitespace-nowrap scrolling-cell">
@@ -164,20 +157,15 @@ function Table() {
            
             <ScrollingTableRow />
    
-              <tr>
+              <tr key="none">
                 <td></td>
                 <td></td>
                 <td></td>
                 </tr>
-                 <tr className="bg-white bg-opacity-10">
-                  
+                 <tr className="bg-white bg-opacity-10" key={userTemp.key}>
                   <td className="border border-gray-400 px-4 py-1">{pos < 3 ? icon[pos] : pos+1+"°"}</td> 
-                  {
-                  <>
-                    <td className="border border-gray-400 px-4 py-1">{userTemp.name}</td>
-                    <td className="border border-gray-400 px-4 py-1">{userTemp.score}<a className="text-green-500">+{todayScore}</a></td>
-                  </>
-                  }
+                  <td className="border border-gray-400 px-4 py-1">{userTemp.name}</td>
+                  <td className="border border-gray-400 px-4 py-1">{userTemp.score}<a className="text-green-500">+{todayScore}</a></td>
                 </tr> 
             </tbody>
           </table>
