@@ -69,7 +69,6 @@ const getBoxIcons = (guessList: any[]) => {
 
 const buildShareText = (guessList: any[]) => {
   let score = buildScore(guessList);
-  console.debug(score)
 
   let icons = getBoxIcons(guessList);
   let todayStr = getDayFormattedText();

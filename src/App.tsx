@@ -8,66 +8,72 @@ import { getDailySong } from "./components/utils/dataService";
 import { getAccessToken } from "./components/utils/spotifyService";
 import { SongConfig } from "./components/game/SongConfig";
 import Error from "./components/Error";
+import LoadingSpinner from "./components/LoadingSpinner";
+import { errorString } from "./components/game/Constants";
 
-const APP_VERSION = process.env.REACT_APP_VERSION || "0"
+const APP_VERSION = process.env.REACT_APP_VERSION || "0";
 console.debug("v" + APP_VERSION);
-
-const FIREBASE_API = process.env.REACT_APP_FIREBASE_API_KEY
-console.debug("v" + FIREBASE_API);
 
 const currentVersion = localStorage.getItem("version");
 if (currentVersion !== APP_VERSION) {
-  console.log(`version upgrated from ${currentVersion} to ${APP_VERSION}`)
+  console.log(`version upgrated from ${currentVersion} to ${APP_VERSION}`);
   localStorage.setItem("version", APP_VERSION);
 }
 
 const EMPTY_SONG_CONFIG: SongConfig = {
   trackName: "",
   breaks: [],
-  others: []
-}
-
+  others: [],
+};
 
 function App() {
-
   const [loading, setLoading] = useState(true);
-  const [currentSongConfig, setCurrentSongConfig] = useState<SongConfig>(EMPTY_SONG_CONFIG);
+  const [currentSongConfig, setCurrentSongConfig] =
+    useState<SongConfig>(EMPTY_SONG_CONFIG);
 
   const [accessToken, setAccessToken] = useState("");
 
-  const [verify, setVerify] = useState(false);
+  const [verify, setVerify] = useState(true);
+  const [serverDate, setServerDate] = useState("");
 
   useEffect(() => {
     getAccessToken().then((value: any) => {
       setAccessToken(value);
-      getDailySong(value).then(songConfig => {
+      getDailySong(value).then((songConfig) => {
         setCurrentSongConfig(songConfig);
-        setLoading(false)          
-      })
-    }); 
-     
-  }, [])
+        setLoading(false);
+      });
 
-  useEffect(() => {
-    console.debug("===== SERVER DATE CONTROL ====");
-    fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
-      (response) => {
-        response.json().then((data) => {
+      console.debug("===== SERVER DATE CONTROL ====");
+      fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
+        (response) => {
+          response.json().then((data) => {
+            const today = new Date();
+            const serverTmpDate = new Date(Date.parse(data.datetime));
 
-          const today = new Date();
-          const serverTmpDate = new Date(Date.parse(data.datetime));
+            setServerDate(data.datetime.replaceAll("-", "").substring(0, 8));
 
-          console.debug("Client: " + today.toISOString().substring(0,11) + " - Server: " + serverTmpDate.toISOString().substring(0,11))
-          if (today.toISOString().substring(0,11) !== serverTmpDate.toISOString().substring(0,11)) {
-              setVerify(true)
-          } 
-          else {
-            setVerify(false)
-          }
-        });
-      }
-    );
+            console.debug(
+              "Client: " +
+                today.toISOString().substring(0, 11) +
+                " - Server: " +
+                serverTmpDate.toISOString().substring(0, 11)
+            );
+            if (
+              today.toISOString().substring(0, 11) !==
+              serverTmpDate.toISOString().substring(0, 11)
+            ) {
+              setVerify(true);
+            } else {
+              setVerify(false);
+            }
+          });
+        }
+      );
+    });
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
@@ -75,24 +81,18 @@ function App() {
         <Header />
         <AllModals />
       </ModalContextProvider>
-      { verify ? <Error></Error> :
-      <GameContextProvider verify={verify}>
-        {
-          loading ?
-            <>
-              <div className="max-w-screen-sm w-full mx-auto flex-col" >
-                <div className="text-center m-3 mt-6">
-                  Caricamento...
-                </div>
-              </div>
-              .</>
-            : (
-              <PlayerContainer songConfig={currentSongConfig} 
-              accessToken = {accessToken}/>
-            )
-        }
-      </GameContextProvider>
-  }
+      {loading ? (
+        <LoadingSpinner></LoadingSpinner>
+      ) : verify ? (
+        <Error></Error>
+      ) : (
+        <GameContextProvider date={serverDate}>
+          <PlayerContainer
+            songConfig={currentSongConfig}
+            accessToken={accessToken}
+          />
+        </GameContextProvider>
+      )}
     </div>
   );
 }
