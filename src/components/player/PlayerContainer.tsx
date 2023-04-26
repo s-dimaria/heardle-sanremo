@@ -60,7 +60,7 @@ function PlayerContainer({
   };
 
   const loadList = (inputValue: string, callback: (res: any[]) => void) => {
-    if (!inputValue || inputValue.trim().length < 3) {
+    if (!inputValue || inputValue.trim().length < 1) {
       callback([]);
       return;
     }
@@ -160,7 +160,7 @@ function PlayerContainer({
                     }}
                     noOptionsMessage={({ inputValue }) =>
                       !inputValue.trim()
-                        ? "Inserisci almeno 3 caratteri per cercare"
+                        ? "Inserisci almeno 1 carattere per cercare"
                         : "Nessuna Corrispondenza"
                     }
                     placeholder={"La conosci? Cerca per artista / titolo"}

@@ -50,7 +50,7 @@ export const getList = (token: string, inputValue: string, callback: (res: any[]
     myHeaders.append("Authorization", "Bearer " + token);
     myHeaders.append("Content-Type", "application/json");
 
-    fetch("https://api.spotify.com/v1/search?type=track&market=IT&q=" + inputValue, {
+    fetch("https://api.spotify.com/v1/search?type=track&market=IT&limit=40&q=" + inputValue, {
       method: 'GET',
       headers: myHeaders,
       redirect: 'follow'

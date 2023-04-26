@@ -42,25 +42,27 @@ function App() {
         setCurrentSongConfig(songConfig);
         setLoading(false);
       });
+    })
+  },[])
 
+  useEffect(() => {
+    console.log("value of 'veriofy' changed to", verify);
       console.debug("===== SERVER DATE CONTROL ====");
       fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
         (response) => {
           response.json().then((data) => {
             const today = new Date();
-            const serverTmpDate = new Date(Date.parse(data.datetime));
-
             setServerDate(data.datetime.replaceAll("-", "").substring(0, 8));
 
             console.debug(
               "Client: " +
-                today.toISOString().substring(0, 11) +
+                today.toISOString().substring(0, 10).replaceAll("-", "") +
                 " - Server: " +
-                serverTmpDate.toISOString().substring(0, 11)
+                data.datetime.replaceAll("-", "").substring(0, 8)
             );
             if (
-              today.toISOString().substring(0, 11) !==
-              serverTmpDate.toISOString().substring(0, 11)
+              today.toISOString().substring(0, 10).replaceAll("-", "") !==
+              data.datetime.replaceAll("-", "").substring(0, 8)
             ) {
               setVerify(true);
             } else {
@@ -69,8 +71,7 @@ function App() {
           });
         }
       );
-    });
-  }, []);
+  },[]);
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
