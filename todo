@@ -9,7 +9,7 @@ TODO:
     - [X] resettare automaticamente il lunedi
     - [x] aggiornare serverTime per il reset degli score
 
-- [ ] change dominio
+- [x] change dominio
 
 - [X] Testare i punteggi
 - [x] Nickname bannabili (https://github.com/words/cuss)
@@ -23,5 +23,3 @@ EXTRA:
 PROBLEMS:
 - [X] update degli users arriva in ritardo (codice in PLayerContainer)
 - [X] posizione dell'utente rispetto alla classifica
-- [ ] cambiare server per recupero time (spesso da problemi in risposta)
-- [ ] copiare le parole bannabili per aggiungerle altre???

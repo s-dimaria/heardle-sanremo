@@ -27,19 +27,30 @@ function HowToPlay() {
     return <></>;
   }
 
+  function convertToString (name) {
+    
+    let toString = name;
+    toString = toString.replaceAll("1","i");
+    toString = toString.replaceAll("0","o");
+    toString = toString.replaceAll("4","a");
+    toString = toString.replaceAll("3","e");
+    return toString;
+  }
+
   const onChanged = (event) => {
-    const name = event.target.value;
+    let name = event.target.value;
 
     const regex = /^(?!\s*$)[a-zA-Z0-9\s!?\-_$@&]{0,24}$/;
     if (regex.test(name) || name === "") {
       setUsername(name);
     }
 
-    if (name.length >= 3) {
+    let nameString = convertToString(name);
+    if (nameString.length >= 3) {
       for (const key in cuss) {
         if (
-          name.includes(key) ||
-          key.includes(name)
+          nameString.toLowerCase().includes(key) ||
+          key.includes(nameString.toLowerCase())
         ) {
           setIsValid(false);
           return;
