@@ -6,10 +6,10 @@ function NextTimer() {
     const [serverDate, setServerDate] = useState("");
 
     useEffect(() => {
-        fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
+        fetch("https://timeapi.io/api/Time/current/zone?timeZone=Europe/Rome").then(
             (response) => {
             response.json().then((data) => {
-                setServerDate(new Date(data.datetime));
+                setServerDate(new Date(data.dateTime));
             });
             }
         );

@@ -23,3 +23,5 @@ EXTRA:
 PROBLEMS:
 - [X] update degli users arriva in ritardo (codice in PLayerContainer)
 - [X] posizione dell'utente rispetto alla classifica
+- [ ] cambiare server per recupero time (spesso da problemi in risposta)
+- [ ] copiare le parole bannabili per aggiungerle altre???

@@ -38,8 +38,8 @@ function HowToPlay() {
     if (name.length >= 3) {
       for (const key in cuss) {
         if (
-          name.replaceAll(" ", "").includes(key.replaceAll(" ", "")) ||
-          key.replaceAll(" ", "").includes(name.replaceAll(" ", ""))
+          name.includes(key) ||
+          key.includes(name)
         ) {
           setIsValid(false);
           return;
