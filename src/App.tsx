@@ -38,39 +38,68 @@ function App() {
   useEffect(() => {
     getAccessToken().then((value: any) => {
       setAccessToken(value);
-      getDailySong(value).then((songConfig) => {
-        setCurrentSongConfig(songConfig);
-        setLoading(false);
-      });
-    })
-  },[])
 
-  useEffect(() => {
-      console.log("value of 'verify' changed to", verify);
       console.debug("===== SERVER DATE CONTROL ====");
-      // PENSO SIA UN PROBLEMA DI SERVER, NON RIESCE A RECUPERARE LA DATA IN UN TEMPO n
+
       fetch("https://worldtimeapi.org/api/timezone/Europe/Rome")
       .then((response) => response.json())
         .then((data) => {
-            const today = new Date();
-            setServerDate(data.datetime.replaceAll("-", "").substring(0, 8));
+            /* const today = new Date(); */
+            let day: string = data.datetime.replaceAll("-", "/").substring(0, 10)
+            setServerDate(day);
 
             console.debug(
-              "Client: " +
-                today.toISOString().substring(0, 10).replaceAll("-", "") +
+              /* "Client: " +
+                today.toISOString().substring(0, 10).replaceAll("-", "") + */
                 " - Server: " +
-                data.datetime.replaceAll("-", "").substring(0, 8)
+                day
             );
-            if (
+            /* if (
               today.toISOString().substring(0, 10).replaceAll("-", "") !==
               data.datetime.replaceAll("-", "").substring(0, 8)
             ) {
               setVerify(true);
             } else {
               setVerify(false);
-            }
-          });
-        },[verify]);
+            } */
+            
+         
+          
+      getDailySong(value, day).then((songConfig) => {
+        setCurrentSongConfig(songConfig);
+        setLoading(false);
+      });
+    });
+    });
+  },[])
+
+  
+  //useEffect(() => {
+  //    console.debug("===== SERVER DATE CONTROL ====");
+
+  //    fetch("https://worldtimeapi.org/api/timezone/Europe/Rome")
+  //    .then((response) => response.json())
+  //      .then((data) => {
+            /* const today = new Date(); */
+  //          setServerDate(data.datetime.replaceAll("-", "").substring(0, 8));
+
+  //          console.debug(
+              /* "Client: " +
+                today.toISOString().substring(0, 10).replaceAll("-", "") + */
+  //              " - Server: " +
+  //             data.datetime.replaceAll("-", "").substring(0, 8)
+  //          );
+            /* if (
+              today.toISOString().substring(0, 10).replaceAll("-", "") !==
+              data.datetime.replaceAll("-", "").substring(0, 8)
+            ) {
+              setVerify(true);
+            } else {
+              setVerify(false);
+            } */
+            
+  //        });
+  //      },[]); 
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
@@ -80,8 +109,8 @@ function App() {
       </ModalContextProvider>
       {loading ? (
         <LoadingSpinner></LoadingSpinner>
-      ) : verify ? (
-        <Error></Error>
+      )  : serverDate == "" ? (
+        <Error></Error> 
       ) : (
         <GameContextProvider date={serverDate}>
           <PlayerContainer

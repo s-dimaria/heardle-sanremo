@@ -219,7 +219,7 @@ function GameContextProvider({ date, children }) {
     const [state, dispatch] = React.useReducer(modalReducer, loadState())
     const value = {state, dispatch}
     React.useEffect(() => {
-          if(date.localeCompare(state.date) != 0)
+          if(date.replaceAll("/","").localeCompare(state.date) != 0)
             dispatch({type: 'RESET'})  
     },[])
     return <GameContext.Provider value={value}>{children}</GameContext.Provider>
