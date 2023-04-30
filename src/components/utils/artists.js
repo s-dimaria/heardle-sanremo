@@ -195,6 +195,21 @@ export const artists = [
     "alex w",
     "francesca michielin",
     "colapesce",
-    "baby k"
+    "baby k",
+    "bresh",
+    "mr.rain",
+    "mara sattei",
+    "olly",
+    "liberato",
+    "gianmaria",
+    "clara",
+    "margherita vicario",
+    "lo stato sociale",
+    "angelina mango",
+    "naska",
+    "zero assoluto",
+    "negramaro",
+    "max pezzali",
+    "paola & chiara"
 ]
 
