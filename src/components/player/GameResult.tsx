@@ -174,7 +174,7 @@ function GameResult({ songConfig, date }: { songConfig: any, date: string }) {
         <div>
 
           <div className="flex flex-col justify-center items-center">
-            <p className="text-custom-line text-lg mb-2">Settimana #{weeks}</p>
+            <p className="text-custom-line text-lg mb-2">Classifica Settimana #{weeks}</p>
           </div>
           <div className="flex justify-center text-custom-line mb-5">
             <Table />

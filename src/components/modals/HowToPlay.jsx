@@ -4,7 +4,9 @@ import { setUser } from "../utils/firebaseRealtime";
 import { cuss as cussIt } from "cuss/it";
 import { cuss as cussEng } from "cuss";
 
-const cuss = new Map([...cussEng, ...cussIt]);
+const cussItArray = Array.from(Object.keys(cussIt));
+const cussEngArray = Array.from(Object.keys(cussEng).filter((key) => cussEng[key] == 2));
+const cuss = [...cussItArray, ...cussEngArray];
 
 function HowToPlay() {
   const {
@@ -41,6 +43,7 @@ function HowToPlay() {
   }
 
   const onChanged = (event) => {
+
     let name = event.target.value;
 
     const regex = /^(?!\s*$)[a-zA-Z0-9\s!?\-_$@&]{0,24}$/;
@@ -52,8 +55,8 @@ function HowToPlay() {
     if (nameString.length >= 3) {
       for (const key in cuss) {
         if (
-          nameString.toLowerCase().includes(key) ||
-          key.includes(nameString.toLowerCase())
+          nameString.toLowerCase().includes(cuss[key]) ||
+          cuss[key].includes(nameString.toLowerCase())
         ) {
           setIsValid(false);
           return;
@@ -161,7 +164,7 @@ function HowToPlay() {
               </div>
             </div>
             <div className="text-center">
-              <p>Inserisci il tuo Nome e scala la calssifica!</p>
+              <p>Inserisci il tuo Nome e scala la classifica!</p>
             </div>
             <div className="justify-center flex py-2 mt-2">
               <input
