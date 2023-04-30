@@ -1,7 +1,10 @@
 import { useModalData } from "./ModalContext";
 import { useState } from "react";
 import { setUser } from "../utils/firebaseRealtime";
-import { cuss } from "cuss/it";
+import { cuss as cussIt } from "cuss/it";
+import { cuss as cussEng } from "cuss";
+
+const cuss = new Map([...cussEng, ...cussIt]);
 
 function HowToPlay() {
   const {
