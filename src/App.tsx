@@ -32,7 +32,6 @@ function App() {
 
   const [accessToken, setAccessToken] = useState("");
 
-  const [verify, setVerify] = useState(true);
   const [serverDate, setServerDate] = useState("");
 
   useEffect(() => {
@@ -44,26 +43,13 @@ function App() {
       fetch("https://worldtimeapi.org/api/timezone/Europe/Rome")
       .then((response) => response.json())
         .then((data) => {
-            /* const today = new Date(); */
             let day: string = data.datetime.replaceAll("-", "/").substring(0, 10)
             setServerDate(day);
 
             console.debug(
-              /* "Client: " +
-                today.toISOString().substring(0, 10).replaceAll("-", "") + */
                 " - Server: " +
                 day
             );
-            /* if (
-              today.toISOString().substring(0, 10).replaceAll("-", "") !==
-              data.datetime.replaceAll("-", "").substring(0, 8)
-            ) {
-              setVerify(true);
-            } else {
-              setVerify(false);
-            } */
-            
-         
           
       getDailySong(value, day).then((songConfig) => {
         setCurrentSongConfig(songConfig);
@@ -71,35 +57,7 @@ function App() {
       });
     });
     });
-  },[])
-
-  
-  //useEffect(() => {
-  //    console.debug("===== SERVER DATE CONTROL ====");
-
-  //    fetch("https://worldtimeapi.org/api/timezone/Europe/Rome")
-  //    .then((response) => response.json())
-  //      .then((data) => {
-            /* const today = new Date(); */
-  //          setServerDate(data.datetime.replaceAll("-", "").substring(0, 8));
-
-  //          console.debug(
-              /* "Client: " +
-                today.toISOString().substring(0, 10).replaceAll("-", "") + */
-  //              " - Server: " +
-  //             data.datetime.replaceAll("-", "").substring(0, 8)
-  //          );
-            /* if (
-              today.toISOString().substring(0, 10).replaceAll("-", "") !==
-              data.datetime.replaceAll("-", "").substring(0, 8)
-            ) {
-              setVerify(true);
-            } else {
-              setVerify(false);
-            } */
-            
-  //        });
-  //      },[]); 
+  },[serverDate])
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
@@ -116,6 +74,7 @@ function App() {
           <PlayerContainer
             songConfig={currentSongConfig}
             accessToken={accessToken}
+            date={serverDate}
           />
         </GameContextProvider>
       )}

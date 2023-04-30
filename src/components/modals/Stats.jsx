@@ -58,7 +58,6 @@ const getDivScore = (scores, n) => {
     let score = scores.guessList[n].count;
     let scoreFract = score / mTot;
     
-    console.log(scoreFract + " = " + score + " / " + mTot)
     switch (true) {
       case scoreFract > 0.9:
         return (

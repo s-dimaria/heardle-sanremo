@@ -78,7 +78,7 @@ const buildShareText = (guessList: any[]) => {
 
 
 
-function GameResult({ songConfig }: { songConfig: any }) {
+function GameResult({ songConfig, date }: { songConfig: any, date: string }) {
 
   const [weeks, setWeeks] = useState(0);
 
@@ -89,7 +89,7 @@ function GameResult({ songConfig }: { songConfig: any }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const today = new Date();
+      const today = new Date(date);
       const startOfYear = new Date(today.getFullYear(), 4, 1); // 1° maggio dell'anno corrente
       const diffTime = today.getTime() - startOfYear.getTime();
       const diffWeeks = Math.floor(diffTime / (7 * 24 * 60 * 60 * 1000));
@@ -178,8 +178,8 @@ function GameResult({ songConfig }: { songConfig: any }) {
           <div className="flex justify-center text-custom-line mb-5">
             <Table />
           </div>
-          <NextTimer />
-          <NextTimerScore />
+          <NextTimer/>
+          <NextTimerScore/>
           {/* <Banner/> */}
 
 

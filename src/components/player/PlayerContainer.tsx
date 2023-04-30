@@ -14,9 +14,11 @@ import { buildScore } from "../utils";
 function PlayerContainer({
   songConfig,
   accessToken,
+  date,
 }: {
   songConfig: SongConfig;
   accessToken: string;
+  date: string;
 }) {
   const [answer, setAnswer] = useState("");
   const [selectedSong, setSelectedSong] = useState("");
@@ -142,7 +144,7 @@ function PlayerContainer({
 
   return (
     <>
-      {finished ? <GameResult songConfig={songConfig} /> : <GamePlayground />}
+      {finished ? <GameResult songConfig={songConfig} date={date} /> : <GamePlayground />}
       <MusicPlayer songConfig={songConfig} />
       {finished === false && (
         <div className="max-w-screen-sm w-full mx-auto flex-col">
