@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { getDailySong } from "./components/utils/dataService";
 import { getAccessToken } from "./components/utils/spotifyService";
 import { SongConfig } from "./components/game/SongConfig";
-import Error from "./components/Error";
 import LoadingSpinner from "./components/LoadingSpinner";
 
 const APP_VERSION = process.env.REACT_APP_VERSION || "0";
@@ -35,29 +34,42 @@ function App() {
   const [serverDate, setServerDate] = useState("");
 
   useEffect(() => {
-    getAccessToken().then((value: any) => {
-      setAccessToken(value);
+    let isMounted = true;
+    const fetchData = async () => {
+      let accessKey = null;
+      let responseDay = null;
+      while (isMounted && responseDay === null) {
+        try {
+          accessKey = await getAccessToken();
+          responseDay = await fetch(
+            "https://worldtimeapi.org/api/timezone/Europe/Rome"
+          );
+        } catch (error) {
+          console.error("Errore CORS:", error);
+        }
+        if (responseDay !== null && responseDay.ok) {
+          setAccessToken(accessKey);
+          const dataResponse = await responseDay.json();
+          const day = dataResponse.datetime.replaceAll("-", "/").substring(0, 10);
+          setServerDate(day);
 
-      console.debug("===== SERVER DATE CONTROL ====");
+          console.debug(" - Server: " + day);
 
-      fetch("https://worldtimeapi.org/api/timezone/Europe/Rome")
-      .then((response) => response.json())
-        .then((data) => {
-            let day: string = data.datetime.replaceAll("-", "/").substring(0, 10)
-            setServerDate(day);
+          getDailySong(accessKey, day).then((songConfig) => {
+            setCurrentSongConfig(songConfig);
+            setLoading(false);
+          });
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 1200));
+        }
+      }
+    };
+    fetchData();
 
-            console.debug(
-                " - Server: " +
-                day
-            );
-          
-      getDailySong(value, day).then((songConfig) => {
-        setCurrentSongConfig(songConfig);
-        setLoading(false);
-      });
-    });
-    });
-  },[serverDate])
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
@@ -67,8 +79,6 @@ function App() {
       </ModalContextProvider>
       {loading ? (
         <LoadingSpinner></LoadingSpinner>
-      )  : serverDate == "" ? (
-        <Error></Error> 
       ) : (
         <GameContextProvider date={serverDate}>
           <PlayerContainer
