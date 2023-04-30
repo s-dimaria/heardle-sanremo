@@ -1,11 +1,9 @@
 import { getDayStr, getDayStrAsPath } from ".";
-import { SongConfig } from "../game/Models";
-import { artists } from "../utils/constants";
+import { SongConfig } from "../game/SongConfig";
+import { artists } from "../utils/artists";
 import { getDatabase, ref, onValue, set } from "firebase/database";
 import "./firebase";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { valueContainerCSS } from "react-select/dist/declarations/src/components/containers";
-
+import { banWords } from "../game/Constants";
 
 interface Map {
     [key: string]: any
@@ -61,10 +59,11 @@ async function fetchSong(accessToken:string, artist: string): Promise<any> {
 }
 
 
+export const getDailySong = (accessToken: string, dayPath: string): Promise<any> => {
+   
+    //let day = getDayStr()
 
-export const getDailySong = (accessToken: string): Promise<any> => {
-    const banWords = ["sanremo", "rmx","unplugged", "reprise","remaster", "live", "remix", "mix", "version", "edit", "remastered", "concert", "concerto", "live", "studio", "registrazione", "dal vivo", "strumentale", "session", "original"];	// words to filter out
-    let day = getDayStr()
+    let day = dayPath.replaceAll("/","");
 
     let artist = artists[Math.floor(Math.random() * artists.length)];
     let hardCodedSong: any;
@@ -75,7 +74,7 @@ export const getDailySong = (accessToken: string): Promise<any> => {
 
     return new Promise<SongConfig>(async (resolve, reject) => {
 
-        let day = getDayStrAsPath();
+        //let day = getDayStrAsPath();
 
         const database = getDatabase();
 
@@ -106,7 +105,7 @@ export const getDailySong = (accessToken: string): Promise<any> => {
         trackname = trackname.replaceAll("!", "");
 
         hardCodedSong = {
-            day: day,
+            day: dayPath,
             songLength: 30,
             breaks: [1, 2, 4, 8, 16, 30],
             trackName: trackname,
@@ -121,14 +120,14 @@ export const getDailySong = (accessToken: string): Promise<any> => {
         };
 
  
-        const songRef = ref(database, 'songs/' + day);
+        const songRef = ref(database, 'songs/' + dayPath);
         
         onValue(songRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 resolve(data);
             } else {
-                setSong(day, hardCodedSong)
+                setSong(dayPath, hardCodedSong)
                 resolve(hardCodedSong)
             }
         }, (err) => {

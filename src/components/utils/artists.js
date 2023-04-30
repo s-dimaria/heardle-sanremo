@@ -54,7 +54,6 @@ export const artists = [
     "lazza",
     "lowlow",
     "massimo pericolo",
-    "tha supreme",
     "thasup",
     "shiva",
     "nayt",
@@ -151,7 +150,7 @@ export const artists = [
     "valerio scanu",
     "anna oxa",
     "maria scicolone",
-    "emma marrone",
+    "emma",
     "arisa",
     "pinguini tattici nucleari",
     "rovere",
@@ -198,3 +197,4 @@ export const artists = [
     "colapesce",
     "baby k"
 ]
+

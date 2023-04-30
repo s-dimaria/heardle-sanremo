@@ -92,5 +92,26 @@ function editDistance(s1: string, s2: string) {
     return costs[s2.length];
 }
 
+ 
+const buildScore = (guessList: any[]): number => {
+    let max = 100;
+    let points = [82, 68, 54, 36, 12];
+    let i;
+    
+    // punti persi: 12, 10, 8, 6, 4
+    for (i = 0; i < guessList.length; i++) {
+        if(guessList[i].isCorrect === true)
+            break; 
+        if (guessList[i].isSkipped || guessList[i].isCorrect === false) {
+            max = points[i];
+        }
+    }
 
-export { getDayStr, getDayStrAsPath, getDayFormattedText, similarity }
+    if(i == 6)
+        return 0;
+
+    return max;
+}
+
+
+export { getDayStr, getDayStrAsPath, getDayFormattedText, similarity, buildScore }

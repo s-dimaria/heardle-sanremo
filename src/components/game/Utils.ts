@@ -1,6 +1,6 @@
 
 import { STRING_COMPARE_LOCALE } from './Constants';
-import { SongConfig } from './Models';
+import { SongConfig } from './SongConfig';
 import { similarity } from '../utils'
 
 const checkStrings = (expected: string, userAnswer: string) => {

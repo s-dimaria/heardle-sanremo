@@ -213,15 +213,14 @@ function modalReducer(state, action) {
     return latestState;
 }
 
-function GameContextProvider({ children }) {
+function GameContextProvider({ date, children }) {
 
-    let day = getDayStr();
     //load from localstorage
     const [state, dispatch] = React.useReducer(modalReducer, loadState())
     const value = {state, dispatch}
     React.useEffect(() => {
-        if(day.localeCompare(state.date) != 0)
-            dispatch({type: 'RESET'})
+          if(date.replaceAll("/","").localeCompare(state.date) != 0)
+            dispatch({type: 'RESET'})  
     },[])
     return <GameContext.Provider value={value}>{children}</GameContext.Provider>
 }

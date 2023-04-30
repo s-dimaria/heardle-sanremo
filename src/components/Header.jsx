@@ -1,9 +1,20 @@
 import { useModalData } from "./modals/ModalContext";
+import { useState, useEffect } from "react";
 
 function Header() {
 
     const { dispatch } = useModalData();
+    const [uid, setUid] = useState("");
 
+    useEffect(() => {
+        
+        setUid(localStorage.getItem("uid"));
+        
+        return () => {
+            setUid("");
+        }
+        
+      });
 
     const openAbout = () => {
         dispatch({ type: 'About' })
@@ -19,6 +30,10 @@ function Header() {
 
     const openHowToPlay = () => {
         dispatch({ type: 'HowToPlay' })
+    }
+
+    const openVersion = () => {
+        dispatch({ type: 'Versions' })
     }
 
     return (
@@ -60,6 +75,15 @@ function Header() {
                                     <path d="M12 20v-6M6 20V10M18 20V4"></path>
                                 </svg>
                             </button>
+                            {uid? 
+                            <button
+                                className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
+                                onClick={openVersion} type="button" aria-label="Nuove Modalità" title="Nuove modalità">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                                    <animate attributeName="opacity" from="1" to="0.5" dur="1s" repeatCount="indefinite" />
+                                </svg>
+                            </button>:
                             <button
                                 className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
                                 onClick={openHowToPlay} type="button" aria-label="Come giocare" title="Come giocare">
@@ -70,7 +94,7 @@ function Header() {
                                     <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                                     <line x1="12" y1="17" x2="12.01" y2="17"></line>
                                 </svg>
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 </div>

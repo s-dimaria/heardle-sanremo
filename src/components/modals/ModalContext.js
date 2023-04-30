@@ -1,12 +1,14 @@
 import * as React from 'react'
 
-// const ThemeContext = React.createContext({ currentModal: "HowToPlay" });
 const ModalContext = React.createContext();
 
 function modalReducer(state, action) {
     switch (action.type) {
         case 'HowToPlay': {
             return { currentModal: "HowToPlay" }
+        }
+        case 'Versions': {
+            return { currentModal: "Versions" }
         }
         case 'Stats': {
             return { currentModal: "Stats" }
@@ -30,7 +32,7 @@ function modalReducer(state, action) {
 
 function ModalContextProvider({ children }) {
     let currentModal = "HowToPlay";
-    if (localStorage.getItem("played") === "true") {
+    if (localStorage.getItem("firstTime") === "true") {
         currentModal = ""
     }
 
