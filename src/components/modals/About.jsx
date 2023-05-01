@@ -31,7 +31,7 @@ function About() {
                   <p className="mb-3">Ogni giorno Heardle ti presenterà una clip di una canzone popolare italiana.</p>
                   <p className="mb-3">Indovinate nel minor numero possibile di tentativi e tornate ogni giorno per una nuova canzone.</p>
                   <p className="mb-3">Ogni settimana scala la classifica e conquista il podio per vedere il tuo nome immortalato sul nostro
-                     <a href="https://twitter.com/Heardle" className="text-blue-300" target="_blank" rel="noreferrer"> Twitter</a>.
+                     <a href="https://twitter.com/HeardleIta" className="text-blue-300" target="_blank" rel="noreferrer"> Twitter</a>.
                   </p>
                   {/* <p class="mb-3">
                      <a href="https://twitter.com/HeardleTR" class="flex items-center no-underline" target="_blank" rel="noreferrer">

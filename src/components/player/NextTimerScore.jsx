@@ -5,13 +5,33 @@ function NextTimerScore() {
   const [serverDate, setServerDate] = useState("");
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Europe/Rome").then(
-      (response) => {
-        response.json().then((data) => {
-          setServerDate(data.datetime);
-        });
+    let isMounted = true;
+    const fetchData = async () => {
+      let responseDay = null;
+      while(isMounted && responseDay === null) {
+        try {
+          responseDay = await fetch(
+            "https://worldtimeapi.org/api/timezone/Europe/Rome"
+          );
+        } catch (error) {
+          console.error("Errore CORS:", error);
+        }
+        if (responseDay !== null && responseDay.ok) {
+          const dataResponse = await responseDay.json();
+          const day = dataResponse.datetime;
+          setServerDate(day);
+
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 1200));
+        }
       }
-    );
+    };
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+    
   }, []);
 
   useEffect(() => {
@@ -22,12 +42,10 @@ function NextTimerScore() {
       today.getDate() + ((7 - today.getDay()) % 7) + 1
     );
 
-    let interval = setInterval(function() {
-      console.log(today)
-      console.log(nextMonday)
+    let interval = setInterval(function () {
       console.debug("");
       console.debug("===== SERVER TIMER SCORE ====");
-      
+
       let timeUntilMonday = nextMonday.getTime() - today.getTime();
 
       let days = Math.floor(timeUntilMonday / (1000 * 60 * 60 * 24));
@@ -59,14 +77,13 @@ function NextTimerScore() {
       if (timeUntilMonday < 0) {
         clearInterval(interval);
         setTimeout(() => {
-           console.debug("---- RESET SCORE ----")
-           resetAllScoreOfUsers();
+          console.debug("---- RESET SCORE ----");
+          resetAllScoreOfUsers();
         }, 1500);
-      } 
-      
+      }
+
       today.setSeconds(today.getSeconds() + 1);
-      
-    } , 1000);
+    }, 1000);
 
     return () => clearInterval(interval);
   });
