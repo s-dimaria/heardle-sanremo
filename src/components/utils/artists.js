@@ -180,7 +180,6 @@ export const artists = [
     "elettra lamborghini",
     "lorenzo fragola",
     "laura pausini",
-    "takagi & ketra",
     "irama",
     "ultimo",
     "ariete",
@@ -209,6 +208,6 @@ export const artists = [
     "zero assoluto",
     "negramaro",
     "max pezzali",
-    "paola & chiara"
+    "le vibrazioni"
 ]
 
