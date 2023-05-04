@@ -65,7 +65,7 @@ function Header() {
                                 </svg>
                             </button>
                         </div>
-                        <h1 className="font-serif text-3xl font-bold flex-grow text-center flex-2" alt="Heardle Italia">Heardle Italia</h1>
+                        <h1 className="text-3xl font-bold flex-grow text-center flex-2" alt="Heardle Italia">Heardle Italia</h1>
                         <div className="flex flex-1 justify-end">
                             <button className="px-2 py-2 uppercase tracking-widest border-none flex items-center font-semibold text-sm"
                                 onClick={openStats}>

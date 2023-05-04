@@ -208,6 +208,8 @@ export const artists = [
     "zero assoluto",
     "negramaro",
     "max pezzali",
-    "le vibrazioni"
+    "le vibrazioni",
+    "paola & chiara",
+    "takagi & ketra"
 ]
 
