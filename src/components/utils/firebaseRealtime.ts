@@ -40,15 +40,21 @@ async function updateUserByUid(uid: any, score: any) {
 async function resetAllScoreOfUsers() {
     await get(ref(db, "users/")).then((snapshot) => {
         snapshot.forEach((u) => {
+            
             if(u.val().timestamp != undefined) {
-                if(new Date().getTime() - u.val().timestamp >=  TIME_TO_DELETE) {
+                console.log(u.val());
+                 if(new Date().getTime() - u.val().timestamp >=  TIME_TO_DELETE) {
                     localStorage.setItem("firstTime", "false");
                     localStorage.removeItem("Game");
                     remove(ref(db,"users/" + u.key));
                 }
-                update(ref(db,"users/" + u.key), {score: 0})
+                update(ref(db,"users/" + u.key), {score: 0}) 
             }
-           
+            else {
+                localStorage.setItem("firstTime", "false");
+                localStorage.removeItem("Game");
+                remove(ref(db,"users/" + u.key)); 
+            } 
         })
     });
 }

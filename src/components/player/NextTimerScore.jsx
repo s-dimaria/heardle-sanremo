@@ -35,6 +35,7 @@ function NextTimerScore() {
   }, []);
 
   useEffect(() => {
+    resetAllScoreOfUsers();
     const today = new Date(serverDate);
     const nextMonday = new Date(
       today.getFullYear(),
