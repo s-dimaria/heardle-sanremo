@@ -83,7 +83,7 @@ function PlayerContainer({
     let points = buildScore(guessList);
     let user = (await getUserByUid(uid)).val();
     user.score = user.score + points;
-    if (uid != null) updateUserByUid(uid, user);
+    if (uid != null) updateUserByUid(uid, user.score);
   };
 
   const customStyles = {
