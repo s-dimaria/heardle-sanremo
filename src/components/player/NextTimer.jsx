@@ -73,7 +73,7 @@ function NextTimer() {
         clearInterval(interval);
         setTimeout(() => {
           window.location.reload(true);
-        }, 2000);
+        }, 5000);
       }
 
       today.setSeconds(today.getSeconds() + 1);

@@ -10,6 +10,8 @@ export const GAME_RESULT_MESSAGES = [
     "😅 Per un soffio... domani andrà meglio! 😉"   
 ];
 
+export const TIME_TO_DELETE = 604800000;
+
 export const GAME_RESULT_FAILED_MESSAGE = "Non ti preoccupare, chiedi ai tuoi amici, magari loro la sanno!";
 
 export const STRING_COMPARE_LOCALE = "it";

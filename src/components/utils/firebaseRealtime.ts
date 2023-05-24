@@ -1,6 +1,7 @@
-import { getDatabase, ref, set, get, update} from "firebase/database";
+import { getDatabase, ref, set, get, update, remove} from "firebase/database";
 import { uid } from "uid";
 import './firebase';
+import { TIME_TO_DELETE } from "../game/Constants";
 
 const db = getDatabase();
 
@@ -33,13 +34,21 @@ const getUserByUid = async (uid: any) => {
 
 
 async function updateUserByUid(uid: any, score: any) {
-    await update(ref(db, "users/" + uid), score);
+    await update(ref(db, "users/" + uid), {score: score, timestamp: new Date().getTime()});
 }
 
 async function resetAllScoreOfUsers() {
     await get(ref(db, "users/")).then((snapshot) => {
         snapshot.forEach((u) => {
-            update(ref(db,"users/" + u.key), {score: 0})
+            if(u.val().timestamp != undefined) {
+                if(new Date().getTime() - u.val().timestamp >=  TIME_TO_DELETE) {
+                    localStorage.setItem("firstTime", "false");
+                    localStorage.removeItem("Game");
+                    remove(ref(db,"users/" + u.key));
+                }
+                update(ref(db,"users/" + u.key), {score: 0})
+            }
+           
         })
     });
 }
