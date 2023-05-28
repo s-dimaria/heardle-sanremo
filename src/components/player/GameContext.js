@@ -131,7 +131,7 @@ function modalReducer(state, action) {
             }
             break
         }
-        case 'SUBMIT-CORRRECT': {
+        case 'SUBMIT-CORRECT': {
             let guessList = state.guessList;
             let lastStep = state.lastStep;
             let openedStep = state.openedStep;
