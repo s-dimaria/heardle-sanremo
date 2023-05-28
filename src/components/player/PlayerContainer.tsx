@@ -42,7 +42,7 @@ function PlayerContainer({
 
     if (win) {
       dispatch({
-        type: "SUBMIT-CORRRECT",
+        type: "SUBMIT-CORRECT",
         payload: { step: openedStep, answer: answer },
       });
       updateScore();
@@ -59,6 +59,7 @@ function PlayerContainer({
 
   const onFinishClicked = () => {
     dispatch({ type: "FINISH" });
+    updateScore();
   };
 
   const loadList = (inputValue: string, callback: (res: any[]) => void) => {
