@@ -23,6 +23,7 @@ function HowToPlay() {
     const infoUser = {
       name: username,
       score: 0,
+      timestamp: new Date().getTime()
     };
 
     await setUser(username, infoUser);

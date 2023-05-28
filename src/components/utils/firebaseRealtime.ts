@@ -9,13 +9,13 @@ function getDB() {
     return db;
 }
 
-async function setUser(user: string, score: any) {
+async function setUser(username: string, user: any) {
 
     var u = uid(16);
     localStorage.setItem("uid", u);
-    localStorage.setItem("user", user);
+    localStorage.setItem("user", username);
     
-    await set(ref(db, "users/" + u), score);
+    await set(ref(db, "users/" + u), user);
 
     return u;
 }
