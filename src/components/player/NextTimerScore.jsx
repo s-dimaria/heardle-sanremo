@@ -76,10 +76,10 @@ function NextTimerScore() {
 
       if (timeUntilMonday < 0) {
         clearInterval(interval);
-        //setTimeout(async() => {
-        console.debug("---- RESET SCORE ----");
-        resetAllScoreOfUsers();
-        //}, 1500);
+        setTimeout(async() => {
+          console.debug("---- RESET SCORE ----");
+          resetAllScoreOfUsers();
+        }, 1000);
       }
 
       today.setSeconds(today.getSeconds() + 1);
