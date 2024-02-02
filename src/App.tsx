@@ -9,6 +9,7 @@ import { getAccessToken } from "./components/utils/spotifyService";
 import { SongConfig } from "./components/game/SongConfig";
 import LoadingSpinner from "./components/LoadingSpinner";
 
+
 const APP_VERSION = process.env.REACT_APP_VERSION || "0";
 console.debug("v" + APP_VERSION);
 
@@ -71,11 +72,15 @@ function App() {
     };
   }, []);
 
+  const startGame = () => {
+    setLoading(false)
+  };
+
   return (
     <div className="bg-custom-bg text-custom-fg overflow-auto flex flex-col mobile-h">
       <ModalContextProvider>
         <Header />
-        <AllModals />
+        <AllModals/>
       </ModalContextProvider>
       {loading ? (
         <LoadingSpinner></LoadingSpinner>

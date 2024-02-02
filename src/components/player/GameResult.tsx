@@ -1,7 +1,6 @@
 import { useGameData } from "./GameContext";
 import copy from 'copy-to-clipboard';
 import NextTimer from "./NextTimer";
-import NextTimerScore from "./NextTimerScore";
 import { useState, useEffect } from "react";
 import { GAME_RESULT_FAILED_MESSAGE, GAME_RESULT_MESSAGES, HEARDLE_IT_WEB_URL } from "../game/Constants";
 import { buildScore, getDayFormattedText } from "../utils";
@@ -180,9 +179,7 @@ function GameResult({ songConfig, date }: { songConfig: any, date: string }) {
             <Table />
           </div>
           <NextTimer/>
-          <NextTimerScore/>
-          <Banner/>
-
+          <Banner/> 
 
         </div>
 

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { getUserByUid } from '../utils/firebaseRealtime';
 
 const ModalContext = React.createContext();
 
@@ -31,16 +32,43 @@ function modalReducer(state, action) {
 
 
 function ModalContextProvider({ children }) {
-    let currentModal = "HowToPlay";
-    if (localStorage.getItem("firstTime") === "true") {
-        currentModal = ""
-    }
+    let currentModal = "Reset";
 
     const [state, dispatch] = React.useReducer(modalReducer, { currentModal: currentModal })
+    const [loading, setLoading] = React.useState(true);
     // NOTE: you *might* need to memoize this value
     // Learn more in http://kcd.im/optimize-context
     const value = { state, dispatch }
-    return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+
+    React.useEffect(() => {
+
+        const getUser = async () => {
+
+            if(localStorage.getItem("uid"))
+                getUserByUid(localStorage.getItem("uid")).then((val) => {
+                    if(val.val() == null) {
+                        localStorage.setItem("firstTime", "false");
+                        localStorage.removeItem("Game");
+                        dispatch({ type: "HowToPlay" });
+                    }
+                })
+            else {
+                localStorage.removeItem("Game");
+                dispatch({ type: "HowToPlay" });
+            }
+
+            if(localStorage.getItem("firstTime") === "true") {
+                dispatch({ type: "Reset" });
+            }
+
+            setLoading(false);
+        };
+
+        getUser();
+
+    },[])
+
+    return ( <> { loading ? <></> : <ModalContext.Provider value={value}>{children}</ModalContext.Provider>}</>)
 }
 
 function useModalData() {

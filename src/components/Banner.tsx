@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 
+/**
+ * Component for advertisement!!
+ * 
+ */
 
 const loadScript = (src:any) => {
     return new Promise((resolve, reject) => {
