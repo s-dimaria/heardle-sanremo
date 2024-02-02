@@ -91,10 +91,10 @@ function GameResult({ songConfig, date }: { songConfig: any, date: string }) {
   useEffect(() => {
     const interval = setInterval(() => {
       const today = new Date(date);
-      const startOfYear = new Date(today.getFullYear(), 4, 1); // 1° maggio dell'anno corrente
+      const startOfYear = new Date(today.getFullYear(), 0, 1); // 1° gennaio dell'anno corrente
       const diffTime = today.getTime() - startOfYear.getTime();
       const diffWeeks = Math.floor(diffTime / (7 * 24 * 60 * 60 * 1000));
-      setWeeks(diffWeeks);
+      setWeeks(diffWeeks + 1);
     }, 1000);
 
     return () => clearInterval(interval);
