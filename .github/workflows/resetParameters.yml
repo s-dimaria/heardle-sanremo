@@ -1,0 +1,27 @@
+name: Reset Firebase Database
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Esegui ogni lunedì alle 00:00
+
+jobs:
+  reset-firebase-database:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install Firebase admin
+      run: npm install firebase-admin --save
+    
+    - name: Run Reset Script
+      run: node heardle-ita/script-score-reset.js
+
+env:
+  FIREBASE_CRED: ${{ secrets.FIREBASE_CRED }}
