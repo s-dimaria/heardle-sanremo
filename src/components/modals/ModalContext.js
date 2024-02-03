@@ -44,8 +44,9 @@ function ModalContextProvider({ children }) {
 
         const getUser = async () => {
 
-            if(localStorage.getItem("uid"))
-                getUserByUid(localStorage.getItem("uid")).then((val) => {
+            const uid = localStorage.getItem("uid")
+            if(uid)
+                getUserByUid(uid).then((val) => {
                     if(val.val() == null) {
                         localStorage.setItem("firstTime", "false");
                         localStorage.removeItem("Game");
