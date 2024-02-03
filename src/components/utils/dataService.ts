@@ -2,7 +2,7 @@ import { getDayStr, getDayStrAsPath } from ".";
 import { SongConfig } from "../game/SongConfig";
 import { artists } from "../utils/artists";
 import { getDatabase, ref, onValue, set } from "firebase/database";
-import "./firebase";
+import { db } from "./firebase";
 import { banWords } from "../game/Constants";
 
 interface Map {
@@ -25,11 +25,11 @@ const DEFAULT_SONG = {
 const SONG_DATABASE: Map = {};
 
 const setSong = (day: string, selectedSong: any) => {
-  const database = getDatabase();
+  //const database = getDatabase();
 
   let hardCodedSong = selectedSong;
 
-  set(ref(database, "songs/" + day), hardCodedSong);
+  set(ref(db, "songs/" + day), hardCodedSong);
 };
 
 async function fetchSong(accessToken: string, artist: string): Promise<any> {
@@ -70,7 +70,7 @@ export const getDailySong = (
 
   return new Promise<SongConfig>(async (resolve, reject) => {
 
-    const database = getDatabase();
+    //const database = getDatabase();
 
     let selectedSong: any;
     var value: boolean = true;
@@ -129,7 +129,7 @@ export const getDailySong = (
       image: selectedSong.album.images[0].url,
     };
 
-    const songRef = ref(database, "songs/" + dayPath);
+    const songRef = ref(db, "songs/" + dayPath);
 
     onValue(
       songRef,

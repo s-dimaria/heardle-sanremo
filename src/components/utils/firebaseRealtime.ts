@@ -1,8 +1,6 @@
 import { getDatabase, ref, set, get, update, remove } from "firebase/database";
 import { uid } from "uid";
-import "./firebase";
-
-const db = getDatabase();
+import { db } from "./firebase";
 
 function getDB() {
   return db;
