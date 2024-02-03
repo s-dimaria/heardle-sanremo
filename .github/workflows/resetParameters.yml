@@ -17,11 +17,14 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install Firebase admin
-      run: npm install firebase-admin --no-save
+    - name: Check Script File
+      run: |
+        if [ ! -f "heardle-ita/script-score-reset.js" ]; then
+          echo "Error: Script file not found."
+          exit 1
+        fi
     
     - name: Run Reset Script
+      env:
+        FIREBASE_CRED: ${{ secrets.FIREBASE_CRED }}
       run: node heardle-ita/script-score-reset.js
-
-env:
-  FIREBASE_CRED: ${{ secrets.FIREBASE_CRED }}
