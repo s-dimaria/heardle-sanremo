@@ -18,7 +18,7 @@ jobs:
         node-version: '14'
 
     - name: Install Firebase admin
-      run: npm install firebase-admin --save
+      run: npm install firebase-admin --no-save
     
     - name: Run Reset Script
       run: node heardle-ita/script-score-reset.js
