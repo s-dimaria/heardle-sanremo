@@ -23,4 +23,5 @@ ref.once("value", function(snapshot) {
   });
 
   console.debug("Users final:", snapshot.numChildren());
+  process.exit(0); // 0 indicates successful termination
 });

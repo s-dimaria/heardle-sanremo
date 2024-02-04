@@ -17,6 +17,10 @@ jobs:
       with:
         node-version: '14'
 
+    - name: Install Dependencies
+      run: |
+        npm install firebase-admin
+
     - name: Check Script File
       run: |
         if [ ! -f "heardle-ita/script-score-reset.js" ]; then
