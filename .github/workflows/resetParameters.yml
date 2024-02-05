@@ -2,7 +2,7 @@ name: Reset Firebase Database
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # Esegui ogni lunedì alle 00:00
+    - cron: '0 23 * * 1'
 
 jobs:
   reset-firebase-database:
@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -23,7 +23,7 @@ jobs:
 
     - name: Check Script File
       run: |
-        if [ ! -f "heardle-ita/script-score-reset.js" ]; then
+        if [ ! -f "script-score-reset.js" ]; then
           echo "Error: Script file not found."
           exit 1
         fi
@@ -31,4 +31,4 @@ jobs:
     - name: Run Reset Script
       env:
         FIREBASE_CRED: ${{ secrets.FIREBASE_CRED }}
-      run: node heardle-ita/script-score-reset.js
+      run: node script-score-reset.js
