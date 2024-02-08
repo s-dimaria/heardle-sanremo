@@ -28,7 +28,7 @@ function Table() {
     console.debug('getUsersRT')
 
     setLoading(true)
-    onValue(ref(getDB(),"users/"), (snapshot) => {
+    onValue(ref(getDB(),"sanremo/users/"), (snapshot) => {
         let users = [];
         let bests = [];
         snapshot.forEach((u) => {
@@ -69,7 +69,7 @@ function Table() {
 
     console.debug('getUserRTByUid')
 
-    onValue(ref(getDB(),"users/" + myUID), (snapshot) => {
+    onValue(ref(getDB(),"sanremo/users/" + myUID), (snapshot) => {
           setUserTemp(snapshot.val())
         });
     

@@ -1,5 +1,5 @@
 export const HEARDLE_IT_WEB_URL = "https://heardle.it";
-export const HEARDLE_SPOTIFY_LIST_URL = "https://open.spotify.com/playlist/2JpsZD5kqsVleaNDEGSmND?si=906b4ac927714be6";
+export const HEARDLE_SPOTIFY_LIST_URL = "https://open.spotify.com/playlist/37i9dQZF1DWVQfeA9N7Q0g";
 
 export const GAME_RESULT_MESSAGES = [
     "👂 Assoluto! 👏",
@@ -21,6 +21,7 @@ export const icon = ["🥇","🥈","🥉"]
 export const errorString = "Oops... qualcosa è andato storto! Controlla le tue impostazioni di connessione e riprova!";
 
 export const versions = [
+    {name:"", url: "http://heardle.it/", tag: ""}, 
     {name:"Indie", url: "http://indie.heardle.it/", tag: ""},  
     {name:"90s", url: "", tag: "Coming Soon"},
     {name:"X Factor", url: "", tag: "Coming Soon"},

@@ -210,6 +210,12 @@ export const artists = [
     "max pezzali",
     "le vibrazioni",
     "paola & chiara",
-    "takagi & ketra"
+    "takagi & ketra",
+    "maninni",
+    "diodato",
+    "the kolors",
+    "bigmama",
+    "santi francesi",
+    "la sad"
 ]
 

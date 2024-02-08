@@ -61,13 +61,9 @@ function PlayerContainer({
     dispatch({ type: "FINISH" });
     updateScore();
   };
-
+  
   const loadList = (inputValue: string, callback: (res: any[]) => void) => {
-    if (!inputValue || inputValue.trim().length < 1) {
-      callback([]);
-      return;
-    }
-
+    // TODO: ricercare dopo 1 secondo dall'inserimento
     getList(accessToken, inputValue, callback);
   };
 
@@ -161,6 +157,7 @@ function PlayerContainer({
                       DropdownIndicator: () => null,
                       IndicatorSeparator: () => null,
                     }}
+                    loadingMessage={() => 'Ricerca in corso...'}
                     noOptionsMessage={({ inputValue }) =>
                       !inputValue.trim()
                         ? "Inserisci almeno 1 carattere per cercare"

@@ -29,16 +29,16 @@ const setSong = (day: string, selectedSong: any) => {
 
   let hardCodedSong = selectedSong;
 
-  set(ref(db, "songs/" + day), hardCodedSong);
+  set(ref(db, "sanremo/songs/" + day), hardCodedSong);
 };
 
-async function fetchSong(accessToken: string, artist: string): Promise<any> {
+async function fetchSong(accessToken: string): Promise<any> {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + accessToken);
   myHeaders.append("Content-Type", "application/json");
 
   return await fetch(
-    "https://api.spotify.com/v1/search?type=track&market=IT&q=" + artist,
+    "https://api.spotify.com/v1/playlists/37i9dQZF1DWVQfeA9N7Q0g",
     {
       method: "GET",
       headers: myHeaders,
@@ -47,10 +47,10 @@ async function fetchSong(accessToken: string, artist: string): Promise<any> {
   )
     .then((response) => response.json())
     .then(
-      (response) =>
+      (response) => 
         response.tracks.items[
           Math.floor(Math.random() * response.tracks.items.length)
-        ]
+        ].track
     );
 }
 
@@ -61,7 +61,7 @@ export const getDailySong = (
 
   let day = dayPath.replaceAll("/", "");
 
-  let artist = artists[Math.floor(Math.random() * artists.length)];
+  //let artist = artists[Math.floor(Math.random() * artists.length)];
   let hardCodedSong: any;
 
   if (SONG_DATABASE[day]) {
@@ -77,23 +77,16 @@ export const getDailySong = (
 
     do {
       do {
-        selectedSong = await fetchSong(accessToken, artist).then((song) => {
+        selectedSong = await fetchSong(accessToken).then((song) => {
           value = new RegExp(banWords.join("|")).test(song.name.toLowerCase());
           value ? console.debug("rejected: " + value) : null;
           return song;
         });
       } while(value);
       console.debug("Preview url: " + (selectedSong.preview_url != null));
-      console.debug(
-        "Compared: " +
-          (selectedSong.artists[0].name.toLowerCase() + " != " + artist) +
-          " " +
-          (selectedSong.artists[0].name.toLowerCase() != artist)
-      );
-      console.debug("filtered: " + value);
     } while (
-      selectedSong.preview_url != null &&
-      selectedSong.artists[0].name.toLowerCase() != artist
+      selectedSong.preview_url == null
+      //selectedSong.artists[0].name.toLowerCase() != artist
     );
 
     let song = selectedSong.name.includes("-")
@@ -129,7 +122,7 @@ export const getDailySong = (
       image: selectedSong.album.images[0].url,
     };
 
-    const songRef = ref(db, "songs/" + dayPath);
+    const songRef = ref(db, "sanremo/songs/" + dayPath);
 
     onValue(
       songRef,
