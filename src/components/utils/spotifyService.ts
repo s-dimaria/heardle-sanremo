@@ -73,7 +73,7 @@ async function fetchTracks(inputValue: string, offset: number, token: string) {
 async function runSearch(inputValue: string, token: string) {
   let allResults: any[] = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const items = await fetchTracks(inputValue, i, token);
 
     if (items === undefined)
@@ -87,16 +87,18 @@ async function runSearch(inputValue: string, token: string) {
   return combinedResult
 }
 
-export const getList = (token: string, inputValue: string, callback: (res: SongOption[]) => void) => {
+export const getList = (token: string, inputValue: string) => {
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token);
   myHeaders.append("Content-Type", "application/json");
 
+  let sortedTracks : SongOption[] = [];
+
   if (inputValue != "") {
     const requestTrack = runSearch(inputValue, token);
 
-    requestTrack
+    return requestTrack
       .then(response => {
 
         console.warn("Searching...")
@@ -106,8 +108,8 @@ export const getList = (token: string, inputValue: string, callback: (res: SongO
         if (response && response.items) {
 
           if (response.items.length === 0) {
-            callback(tracks)
-            return
+            
+            return tracks
           }
 
           response.items
@@ -162,11 +164,14 @@ export const getList = (token: string, inputValue: string, callback: (res: SongO
           return sortedTracks
         })
 
-        callback(sortedTracks)
-        return;
+        
+        return sortedTracks;
       })
       .catch((err) => {
         console.error(err);
+        return sortedTracks;
       });
   }
+
+  return Promise.resolve(sortedTracks);
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
 import GamePlayground from "./GamePlayground";
 import GameResult from "./GameResult";
@@ -7,9 +7,10 @@ import MusicPlayer from "../music/MusicPlayer";
 import { checkAnswer } from "../game/Utils";
 import { OnChangeValue } from "react-select";
 import { SongConfig } from "../game/SongConfig";
-import { getList } from "../utils/spotifyService";
+import { SongOption, getList } from "../utils/spotifyService";
 import { getUserByUid, updateUserByUid } from "../utils/firebaseRealtime";
 import { buildScore } from "../utils";
+import { Subject, debounceTime, distinctUntilChanged } from "rxjs";
 
 function PlayerContainer({
   songConfig,
@@ -22,6 +23,8 @@ function PlayerContainer({
 }) {
   const [answer, setAnswer] = useState("");
   const [selectedSong, setSelectedSong] = useState("");
+
+  let inputSubject = new Subject<prova>()
 
   const {
     dispatch,
@@ -61,10 +64,24 @@ function PlayerContainer({
     dispatch({ type: "FINISH" });
     updateScore();
   };
+
+  interface prova {
+    input: string,
+    callback: (res: SongOption[]) => void
+  }
+
+  useEffect(() => {
+    inputSubject.pipe(
+      debounceTime(750),
+      distinctUntilChanged()
+    ).subscribe((v) => getList(accessToken, v.input).then((el: SongOption[]) => v.callback(el)))
+  })
   
   const loadList = (inputValue: string, callback: (res: any[]) => void) => {
     // TODO: ricercare dopo 1 secondo dall'inserimento
-    getList(accessToken, inputValue, callback);
+    inputSubject.next({input: inputValue, callback: callback})
+
+      
   };
 
   const handleInputChange = (newValue: OnChangeValue<any, any>) => {

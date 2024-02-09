@@ -216,6 +216,7 @@ export const artists = [
     "the kolors",
     "bigmama",
     "santi francesi",
-    "la sad"
+    "la sad",
+    "il volo"
 ]
 
