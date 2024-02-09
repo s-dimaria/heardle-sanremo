@@ -29,7 +29,7 @@ export const versions = [
 ]
 
 export const banWords = [
-    "rmx","unplugged", "reprise","remaster", "live", "remix", 
+    "rmx","unplugged", "reprise", "remaster", "live", "remix", 
     "mix", "version", "edit", "remastered", "concert", "concerto", 
     "live", "studio", "registrazione", "dal vivo", "strumentale", 
     "session", "sanremo", "karaoke", "vrs", "performance"
