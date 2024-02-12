@@ -217,6 +217,22 @@ export const artists = [
     "bigmama",
     "santi francesi",
     "la sad",
-    "il volo"
+    "il volo",
+    "gazzelle",
+    "bnkr44",
+    "negra",
+    "ricchi e poveri",
+    "renga nek",
+    "mida",
+    "villabanks",
+    "artie 5ive",
+    "boro",
+    "holden",
+    "enrico nigiotti",
+    "achille lauro",
+    "tommaso paradiso",
+    "federica abbate",
+    "leo gassmann",
+    "subsonica"
 ]
 

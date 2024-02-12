@@ -78,10 +78,7 @@ function PlayerContainer({
   })
   
   const loadList = (inputValue: string, callback: (res: any[]) => void) => {
-    // TODO: ricercare dopo 1 secondo dall'inserimento
     inputSubject.next({input: inputValue, callback: callback})
-
-      
   };
 
   const handleInputChange = (newValue: OnChangeValue<any, any>) => {
